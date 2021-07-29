@@ -29,26 +29,28 @@
  */
 
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
     private CharacterController controller;
     [SerializeField]
     private float playerSpeed = 2.0f;
-
+    public InputAction moveInput;
 
     private void Start()
     {
         controller = GetComponent<CharacterController>();
+        moveInput.Enable();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        Vector3 move = new Vector3(-Input.GetAxis("Vertical"), 0, Input.GetAxis("Horizontal"));
+        Vector3 move = new Vector3(-moveInput.ReadValue<Vector2>().y, 0, moveInput.ReadValue<Vector2>().x);
         if (move.magnitude > 0.01f)
         {
-            Vector3 targetForward = Vector3.RotateTowards(transform.forward, move, 10, 2);
-            controller.Move(move * Time.deltaTime * playerSpeed);
+            Vector3 targetForward = Vector3.RotateTowards(transform.forward, move, 6.238f * Time.fixedDeltaTime, 2);
+            controller.Move(playerSpeed * Time.fixedDeltaTime * move);
             transform.forward = targetForward;
         }
     }
