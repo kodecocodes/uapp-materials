@@ -704,6 +704,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4, y: 2.0006783, z: 2.2280817}
   m_Center: {x: 0, y: 1.0003392, z: 0.00000029802322}
+--- !u!114 &200703422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200703420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 004a927cba842f84da2ad09713715128, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &207875691
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3146,6 +3158,12 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Move Input
       m_Flags: 0
+  pickUpZones:
+  - {fileID: 1161656884}
+  - {fileID: 1956698949}
+  - {fileID: 920658504}
+  choppingBoard: {fileID: 1248017862}
+  sink: {fileID: 200703422}
 --- !u!1001 &671945208
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4328,6 +4346,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8834317143153002967, guid: 4f871cb0b7e97f6409a760d1032bb0c4, type: 3}
   m_PrefabInstance: {fileID: 914986217}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &920658503 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 01d267708a683d142b78d8227da3a2b3, type: 3}
+  m_PrefabInstance: {fileID: 316250611}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &920658504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920658503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 004a927cba842f84da2ad09713715128, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!64 &920658505
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920658503}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6619638658177629414, guid: 01d267708a683d142b78d8227da3a2b3, type: 3}
 --- !u!1001 &922722152
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20285,6 +20334,18 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -6619638658177629414, guid: 01d267708a683d142b78d8227da3a2b3, type: 3}
+--- !u!114 &1161656884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1161656880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 004a927cba842f84da2ad09713715128, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1175962182
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20809,6 +20870,18 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7621919283119070022, guid: 993b633fb36d2ec42abb5701216e74ff, type: 3}
   m_PrefabInstance: {fileID: 3152128442205588998}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1248017862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1248017861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 004a927cba842f84da2ad09713715128, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!65 &1248017864
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -28126,6 +28199,38 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: bc844082-1f86-4f67-97ce-829fb06cc904
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 644620274}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: PickUp
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 0215504c-9d2d-47f1-8e6a-1d00d4d8bdf8
+    m_ActionName: Player/Pickup / Drop[/Keyboard/space,/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 644620274}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Chop
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: af59d471-f4d3-4e7f-9875-4846fe28fb06
+    m_ActionName: Player/Chop[/Keyboard/ctrl,/XInputControllerWindows/buttonWest]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -34060,6 +34165,18 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -6619638658177629414, guid: 01d267708a683d142b78d8227da3a2b3, type: 3}
+--- !u!114 &1956698949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1956698945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 004a927cba842f84da2ad09713715128, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1960481090
 PrefabInstance:
   m_ObjectHideFlags: 0

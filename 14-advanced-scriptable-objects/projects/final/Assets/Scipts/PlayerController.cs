@@ -28,19 +28,34 @@
  * THE SOFTWARE.
  */
 
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
     private CharacterController controller;
+    private Animator animator;
     [SerializeField]
     private float playerSpeed = 2.0f;
     public InputAction moveInput;
 
+    [SerializeField]
+    private List<InteractionObject> pickUpZones;
+    [SerializeField]
+    private InteractionObject choppingBoard;
+    [SerializeField]
+    private InteractionObject sink;
+
+    // state for holding something or not
+    private bool holding;
+
+    #region Monobehaviours
+
     private void Start()
     {
         controller = GetComponent<CharacterController>();
+        animator = GetComponentInChildren<Animator>();
         moveInput.Enable();
     }
 
@@ -53,5 +68,74 @@ public class PlayerController : MonoBehaviour
             controller.Move(playerSpeed * Time.fixedDeltaTime * move);
             transform.forward = targetForward;
         }
+        else
+        {
+            controller.Move(Vector3.zero);
+        }
+        animator.SetFloat("Speed", controller.velocity.magnitude / playerSpeed);
     }
+
+    #endregion // Monobehaviours
+
+    #region Input Actions
+
+    public void PickUp(InputAction.CallbackContext context)
+    {
+        if (context.action.triggered)
+        {
+            if (!holding)
+            {
+                if (CheckPickups())
+                {
+                    holding = true;
+                    animator.SetBool("Holding", holding);
+                }
+            }
+            else
+            {
+                Debug.Log("Player tried to put something down");
+                holding = false;
+                animator.SetBool("Holding", holding);
+            }
+        }
+    }
+    public void Chop(InputAction.CallbackContext context)
+    {
+        if (context.action.triggered)
+        {
+            if (holding)
+            {
+                if (choppingBoard.CanInteract(transform))
+                {
+                    Debug.LogFormat("Player is chopping!");
+                    animator.SetTrigger("Chop");
+                }
+                else if (sink.CanInteract(transform))
+                {
+                    Debug.LogFormat("Player is washing!");
+                    animator.SetTrigger("Wash");
+                }
+            }
+        }
+    }
+
+    #endregion // Input Actions
+
+    #region Interaction Validators
+
+    private bool CheckPickups()
+    {
+        foreach (InteractionObject i in pickUpZones)
+        {
+            if (i.CanInteract(transform))
+            {
+                Debug.LogFormat("Player picked up from {0}", i.name);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    #endregion // Interaction Validators
+
 }
