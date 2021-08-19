@@ -28,30 +28,66 @@
  * THE SOFTWARE.
  */
 
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class InteractionObject : MonoBehaviour, IInteraction
+public class PickupArea : InteractionObject
 {
-    private static float pickUpRange = 3.0f;
+    public IngredientObject.IngredientType ingredientType;
+    public List<IngredientObject> availableIngredients;
+    public List<Transform> spawnPositions;
+    public Transform dropPosition;
 
-    public bool CanInteract(Transform player)
+    public IngredientPool publicSupply;
+
+    [SerializeField]
+    private float spawnRate = 5f;
+    private float timeSinceSpawn = 0f;
+
+    private void Start()
     {
-        // check distance
-        float distance = Vector2.Distance(new Vector2(player.position.x, player.position.z), new Vector2(transform.position.x, transform.position.z));
-        if (distance < pickUpRange)
+        timeSinceSpawn = UnityEngine.Random.Range(0f, spawnRate);
+        foreach (IngredientObject ingredient in availableIngredients)
         {
-            // check angle
-            Vector3 direction = (transform.position - player.position).normalized;
-            float dot = Vector3.Dot(direction, player.forward);
-            Debug.LogFormat("Facing {1} dot product is {0}", dot, transform.name);
-            if (dot > 0.65f)
-            {
-                // t is within range to pick up from
-                return true;
-            }
+            ingredient.Lerp(dropPosition, spawnPositions[availableIngredients.IndexOf(ingredient)]);
         }
-        return false;
     }
 
-    public abstract void Interact(PlayerController player);
+    private void Update()
+    {
+        timeSinceSpawn += Time.deltaTime;
+        if (timeSinceSpawn > spawnRate)
+        {
+            Spawn();
+        }
+    }
+
+    private void Spawn()
+    {
+        if (availableIngredients.Count < spawnPositions.Count)
+        {
+            //space for more ingredients
+            IngredientObject newIngredient = publicSupply.Fetch(ingredientType);
+            if (newIngredient != null)
+            {
+                availableIngredients.Add(newIngredient);
+                newIngredient.transform.parent = transform;
+                newIngredient.Lerp(dropPosition, spawnPositions[availableIngredients.IndexOf(newIngredient)]);
+            }
+        }
+        timeSinceSpawn = 0;
+    }
+
+    public override void Interact(PlayerController player)
+    {
+        if (availableIngredients.Count == 0)
+        {
+            return;
+        }
+
+        player.TakeIngredient(availableIngredients[0]);
+        availableIngredients.RemoveAt(0);
+    }
 }

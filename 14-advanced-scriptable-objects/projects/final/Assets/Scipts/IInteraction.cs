@@ -34,5 +34,5 @@ public interface IInteraction
 {
     bool CanInteract(Transform player);
 
-    void Interact();
+    void Interact(PlayerController player);
 }

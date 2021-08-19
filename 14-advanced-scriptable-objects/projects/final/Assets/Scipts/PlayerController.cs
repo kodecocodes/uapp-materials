@@ -41,14 +41,21 @@ public class PlayerController : MonoBehaviour
     public InputAction moveInput;
 
     [SerializeField]
-    private List<InteractionObject> pickUpZones;
+    private List<PickupArea> pickUpZones;
     [SerializeField]
-    private InteractionObject choppingBoard;
+    private Workstation choppingBoard;
     [SerializeField]
-    private InteractionObject sink;
+    private Workstation sink;
 
     // state for holding something or not
+    [SerializeField]
     private bool holding;
+    [SerializeField]
+    Transform holdingPosition;
+
+    private Vector3 knifePosition = new Vector3(0, 0.577f, 1.61f);
+    // The Ingredient the player is holding
+    public IngredientObject ingredient { get; private set; }
 
     #region Monobehaviours
 
@@ -61,18 +68,27 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector3 move = new Vector3(-moveInput.ReadValue<Vector2>().y, 0, moveInput.ReadValue<Vector2>().x);
-        if (move.magnitude > 0.01f)
+        if (moveInput.enabled)
         {
-            Vector3 targetForward = Vector3.RotateTowards(transform.forward, move, 6.238f * Time.fixedDeltaTime, 2);
-            controller.Move(playerSpeed * Time.fixedDeltaTime * move);
-            transform.forward = targetForward;
-        }
-        else
-        {
-            controller.Move(Vector3.zero);
+            Vector3 move = new Vector3(-moveInput.ReadValue<Vector2>().y, 0, moveInput.ReadValue<Vector2>().x);
+            if (move.magnitude > 0.01f)
+            {
+                Vector3 targetForward = Vector3.RotateTowards(transform.forward, move, 6.238f * Time.fixedDeltaTime, 2);
+                controller.Move(playerSpeed * Time.fixedDeltaTime * move);
+                transform.forward = targetForward;
+            }
+            else
+            {
+                controller.Move(Vector3.zero);
+            }
         }
         animator.SetFloat("Speed", controller.velocity.magnitude / playerSpeed);
+    }
+
+    public void ToggleMovement(bool enabled = true)
+    {
+        if (enabled) moveInput.Enable();
+        else moveInput.Disable();
     }
 
     #endregion // Monobehaviours
@@ -85,20 +101,15 @@ public class PlayerController : MonoBehaviour
         {
             if (!holding)
             {
-                if (CheckPickups())
-                {
-                    holding = true;
-                    animator.SetBool("Holding", holding);
-                }
+                CheckPickups();
             }
             else
             {
-                Debug.Log("Player tried to put something down");
-                holding = false;
-                animator.SetBool("Holding", holding);
+                CheckPlate();
             }
         }
     }
+
     public void Chop(InputAction.CallbackContext context)
     {
         if (context.action.triggered)
@@ -107,13 +118,11 @@ public class PlayerController : MonoBehaviour
             {
                 if (choppingBoard.CanInteract(transform))
                 {
-                    Debug.LogFormat("Player is chopping!");
-                    animator.SetTrigger("Chop");
+                    choppingBoard.Interact(this);
                 }
                 else if (sink.CanInteract(transform))
                 {
-                    Debug.LogFormat("Player is washing!");
-                    animator.SetTrigger("Wash");
+                    sink.Interact(this);
                 }
             }
         }
@@ -121,21 +130,42 @@ public class PlayerController : MonoBehaviour
 
     #endregion // Input Actions
 
+    public void SetAnimationTrigger(string name)
+    {
+        animator.SetTrigger(name);
+    }
+
     #region Interaction Validators
 
     private bool CheckPickups()
     {
-        foreach (InteractionObject i in pickUpZones)
+        foreach (PickupArea trough in pickUpZones)
         {
-            if (i.CanInteract(transform))
+            if (trough.CanInteract(transform))
             {
-                Debug.LogFormat("Player picked up from {0}", i.name);
+                trough.Interact(this);                
                 return true;
             }
         }
+        ingredient = null;
+        return false;
+    }
+
+    private bool CheckPlate()
+    {
         return false;
     }
 
     #endregion // Interaction Validators
+
+    public void TakeIngredient(IngredientObject newIngredient)
+    {
+        ingredient = newIngredient;
+        ingredient.transform.parent = holdingPosition;
+        ingredient.Lerp(ingredient.transform, holdingPosition, 0.5f);
+        holding = true;
+        animator.SetBool("Holding", holding);
+        ToggleMovement();
+    }
 
 }

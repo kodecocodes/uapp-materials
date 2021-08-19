@@ -35,7 +35,7 @@ using UnityEngine;
 public class IngredientObject : MonoBehaviour
 {
     public enum IngredientType { Carrot, Pepper, Potato, Pea }
-    public enum IngredientState { Raw, Clean, Chopped }
+    public enum IngredientState { Raw, Clean, Chopped, Cooked }
 
     public IngredientType type;
     public IngredientState state;

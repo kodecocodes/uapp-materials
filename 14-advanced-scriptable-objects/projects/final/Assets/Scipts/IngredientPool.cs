@@ -28,30 +28,41 @@
  * THE SOFTWARE.
  */
 
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class InteractionObject : MonoBehaviour, IInteraction
+public class IngredientPool : MonoBehaviour
 {
-    private static float pickUpRange = 3.0f;
+    [SerializeField]
+    private List<IngredientObject> pool;
 
-    public bool CanInteract(Transform player)
+    /// <summary>
+    /// Returns an ingredient from the pool if one is available. Otherwise returns null
+    /// </summary>
+    /// <param name="type"></param>
+    /// <returns>Ingredient Object. Null if no ingredients matching type were available</returns>
+    public IngredientObject Fetch(IngredientObject.IngredientType type)
     {
-        // check distance
-        float distance = Vector2.Distance(new Vector2(player.position.x, player.position.z), new Vector2(transform.position.x, transform.position.z));
-        if (distance < pickUpRange)
+        IngredientObject toReturn;
+        for (int i = 0; i < pool.Count-1; i++) 
         {
-            // check angle
-            Vector3 direction = (transform.position - player.position).normalized;
-            float dot = Vector3.Dot(direction, player.forward);
-            Debug.LogFormat("Facing {1} dot product is {0}", dot, transform.name);
-            if (dot > 0.65f)
+            if (pool[i].type == type)
             {
-                // t is within range to pick up from
-                return true;
+                toReturn = pool[i];
+                pool.RemoveAt(i);
+                return toReturn;
             }
         }
-        return false;
+        return null;
     }
 
-    public abstract void Interact(PlayerController player);
+    /// <summary>
+    /// Return an object to the pool
+    /// </summary>
+    /// <param name="ingredient"></param>
+    public void Add(IngredientObject ingredient)
+    {
+        pool.Add(ingredient);
+    }
 }
