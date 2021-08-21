@@ -30,37 +30,19 @@
 
 using UnityEngine;
 
-public abstract class InteractionObject : MonoBehaviour, IInteraction
+/// <summary>
+/// Infinite supply pool of ingredients
+/// </summary>
+public class SupplyBarrel : InteractionObject
 {
-    private static float pickUpRange = 3.0f;
+    public IngredientObject ingredientPrefab;
 
-    public bool CanInteract(Transform player)
+    public override void Interact(PlayerController player)
     {
-        Collider[] hitColliders = Physics.OverlapSphere(player.position + player.forward, 1f, 1 << LayerMask.NameToLayer("Interactable"));
+        IngredientObject ingredient = Instantiate(ingredientPrefab, transform);
+        ingredient.transform.localPosition = new Vector3(0, 0.75f, 0);
+        ingredient.transform.localRotation = Quaternion.identity;
 
-        if (hitColliders.Length == 0)
-        {
-            return false;
-        }
-
-        GameObject closest = null;
-        foreach (Collider collider in hitColliders)
-        {
-            // ignore colliders that aren't Interaction Objects
-            if (collider.GetComponent<InteractionObject>() == null)
-            {
-                continue;
-            }
-            if (closest == null || 
-                Vector3.Distance(collider.gameObject.transform.position, player.position) <
-                Vector3.Distance(closest.gameObject.transform.position, player.position))
-            {
-                closest = collider.gameObject;
-            }
-        }
-
-        return closest == gameObject;
+        player.TakeIngredient(ingredient);
     }
-
-    public abstract void Interact(PlayerController player);
 }

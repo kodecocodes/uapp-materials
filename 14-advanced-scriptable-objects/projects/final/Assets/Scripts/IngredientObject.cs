@@ -35,7 +35,7 @@ using UnityEngine;
 public class IngredientObject : MonoBehaviour
 {
     public enum IngredientType { Carrot, Pepper, Potato, Pea }
-    public enum IngredientState { Raw, Clean, Chopped, Cooked }
+    public enum IngredientState { Raw, Clean, Chopped }
 
     public IngredientType type;
     public IngredientState state;
@@ -97,8 +97,17 @@ public class IngredientObject : MonoBehaviour
 
     private void SwitchObjectForState(IngredientState state)
     {
-        rawIngredientModel.SetActive(state == IngredientState.Raw);
-        cleanIngredientModel.SetActive(state == IngredientState.Clean);
-        choppedIngredientModel.SetActive(state == IngredientState.Chopped);
+        if (rawIngredientModel != null)
+        {
+            rawIngredientModel.SetActive(state == IngredientState.Raw);
+        }
+        if (cleanIngredientModel != null)
+        {
+            cleanIngredientModel.SetActive(state == IngredientState.Clean);
+        }
+        if (choppedIngredientModel != null)
+        {
+            choppedIngredientModel.SetActive(state == IngredientState.Chopped);
+        }
     }
 }

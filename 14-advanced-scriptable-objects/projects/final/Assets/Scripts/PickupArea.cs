@@ -35,12 +35,12 @@ using UnityEngine;
 
 public class PickupArea : InteractionObject
 {
-    public IngredientObject.IngredientType ingredientType;
-    public List<IngredientObject> availableIngredients;
-    public List<Transform> spawnPositions;
-    public Transform dropPosition;
+    [SerializeField] private IngredientObject.IngredientType ingredientType;
+    [SerializeField] private List<IngredientObject> availableIngredients;
+    [SerializeField] private List<Transform> spawnPositions;
+    [SerializeField] private Transform dropPosition;
 
-    public IngredientPool publicSupply;
+    [SerializeField] private IngredientPool publicSupply;
 
     [SerializeField]
     private float spawnRate = 5f;
@@ -89,5 +89,14 @@ public class PickupArea : InteractionObject
 
         player.TakeIngredient(availableIngredients[0]);
         availableIngredients.RemoveAt(0);
+        Shuffle();
+    }
+
+    private void Shuffle()
+    {
+        for(int i = 0; i < availableIngredients.Count; i++)
+        {
+            availableIngredients[i].Lerp(availableIngredients[i].gameObject.transform, spawnPositions[i]);
+        }
     }
 }
