@@ -34,6 +34,7 @@ using UnityEngine;
 
 public class IngredientPool : MonoBehaviour
 {
+    public List<IngredientObject.IngredientType> poolFilter;
     [SerializeField]
     private List<IngredientObject> pool;
 
@@ -63,6 +64,13 @@ public class IngredientPool : MonoBehaviour
     /// <param name="ingredient"></param>
     public void Add(IngredientObject ingredient)
     {
-        pool.Add(ingredient);
+        if (poolFilter.Contains(ingredient.type))
+        {
+            pool.Add(ingredient);
+        }
+        else
+        {
+            Destroy(ingredient.gameObject);
+        }
     }
 }
