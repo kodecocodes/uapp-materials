@@ -41,11 +41,13 @@ public class PlayerController : MonoBehaviour
     public InputAction moveInput;
 
     [SerializeField]
-    private List<PickupArea> pickUpZones;
+    private List<InteractionObject> pickUpZones;
     [SerializeField]
     private Workstation choppingBoard;
     [SerializeField]
     private Workstation sink;
+    [SerializeField]
+    private PlateStack plateStack;
 
     // state for holding something or not
     [SerializeField]
@@ -103,10 +105,7 @@ public class PlayerController : MonoBehaviour
             {
                 CheckPickups();
             }
-            else
-            {
-                CheckPlate();
-            }
+            CheckPlate();
         }
     }
 
@@ -139,7 +138,7 @@ public class PlayerController : MonoBehaviour
 
     private bool CheckPickups()
     {
-        foreach (PickupArea trough in pickUpZones)
+        foreach (InteractionObject trough in pickUpZones)
         {
             if (trough.CanInteract(transform))
             {
@@ -153,6 +152,12 @@ public class PlayerController : MonoBehaviour
 
     private bool CheckPlate()
     {
+        // check for nearby plates to interact with. 
+        if(plateStack.availablePlate.CanInteract(transform))
+        {
+            plateStack.availablePlate.Interact(this);
+            return true;
+        }
         return false;
     }
 
@@ -166,6 +171,27 @@ public class PlayerController : MonoBehaviour
         holding = true;
         animator.SetBool("Holding", holding);
         ToggleMovement();
+    }
+
+    /// <summary>
+    /// Place the ingredient on a plate
+    /// </summary>
+    /// <param name="plate"></param>
+    public void SetIngredient(Plate plate)
+    {
+        ingredient.transform.SetParent(plate.transform);
+        ingredient.Lerp(ingredient.transform, plate.transform);
+        ingredient = null;
+        holding = false;
+        animator.SetBool("Holding", holding);
+    }
+
+    public void TakePlate(Plate plate)
+    {
+        plate.transform.SetParent(holdingPosition);
+        plate.transform.localPosition = Vector3.zero;
+        holding = true;
+        animator.SetBool("Holding", holding);
     }
 
 }
