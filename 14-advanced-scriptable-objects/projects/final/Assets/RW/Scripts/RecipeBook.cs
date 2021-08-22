@@ -74,7 +74,7 @@ public class RecipeBook : MonoBehaviour
                 return recipe;
             }
         }
-        Debug.Log("No matches found");
+
         return null;
     }
 }
