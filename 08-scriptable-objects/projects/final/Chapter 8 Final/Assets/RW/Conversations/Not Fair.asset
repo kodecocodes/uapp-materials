@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4085ab693f3aa745a2ce974e84ab412, type: 3}
+  m_Name: Not Fair
+  m_EditorClassIdentifier: 
+  dialogueLines:
+  - speaker: Carrot Warrior
+    text: Why do we always have to fight against a tank?
+    thisIsAQuestion: 0
+    dialogueQuestion:
+      firstOption: 
+      secondOption: 
+      conversationWhenFirstOptionWasSelected: {fileID: 0}
+      conversationWhenSecondOptionWasSelected: {fileID: 0}
+    exitGameAfterConversation: 0
+  - speaker: Carrot Warrior
+    text: Can you remember the last time we won against that thing? I'm pretty sure
+      the answer is never!
+    thisIsAQuestion: 0
+    dialogueQuestion:
+      firstOption: 
+      secondOption: 
+      conversationWhenFirstOptionWasSelected: {fileID: 0}
+      conversationWhenSecondOptionWasSelected: {fileID: 0}
+    exitGameAfterConversation: 0
+  - speaker: Carrot Warrior
+    text: It's not fair...
+    thisIsAQuestion: 0
+    dialogueQuestion:
+      firstOption: 
+      secondOption: 
+      conversationWhenFirstOptionWasSelected: {fileID: 0}
+      conversationWhenSecondOptionWasSelected: {fileID: 0}
+    exitGameAfterConversation: 0

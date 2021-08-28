@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4085ab693f3aa745a2ce974e84ab412, type: 3}
+  m_Name: Boss
+  m_EditorClassIdentifier: 
+  dialogueLines:
+  - speaker: Boss
+    text: Hail warrior! Are you ready to enter the arena?
+    thisIsAQuestion: 1
+    dialogueQuestion:
+      firstOption: Yes! (exit the dining hall)
+      secondOption: Not yet.
+      conversationWhenFirstOptionWasSelected: {fileID: 11400000, guid: 7ff3e0e9fa964794a91592efa7be15d9, type: 2}
+      conversationWhenSecondOptionWasSelected: {fileID: 11400000, guid: 6a32ed1e580289d45b78042cf83fcbab, type: 2}
+    exitGameAfterConversation: 0
