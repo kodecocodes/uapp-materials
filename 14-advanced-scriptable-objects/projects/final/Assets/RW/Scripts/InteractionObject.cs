@@ -32,8 +32,6 @@ using UnityEngine;
 
 public abstract class InteractionObject : MonoBehaviour, IInteraction
 {
-    private static float pickUpRange = 3.0f;
-
     public bool CanInteract(Transform player)
     {
         Collider[] hitColliders = Physics.OverlapSphere(player.position + player.forward, 1f, 1 << LayerMask.NameToLayer("Interactable"));

@@ -28,50 +28,42 @@
  * THE SOFTWARE.
  */
 
+using System.Collections;
 using UnityEngine;
 
-public class IngredientObject : MonoBehaviour
+public static class Tween
 {
-    public enum IngredientType { Carrot, Pepper, Potato, Pea }
-    public enum IngredientState { Raw, Clean, Chopped }
-
-    public IngredientType type;
-    public IngredientState state;
-
-    [SerializeField]
-    private GameObject rawIngredientModel;
-    [SerializeField]
-    private GameObject cleanIngredientModel;
-    [SerializeField]
-    private GameObject choppedIngredientModel;
-
-    private void Start()
+    static float duration = 1f;
+    public static void Lerp(this MonoBehaviour m, Transform from, Transform to)
     {
-        SwitchObjectForState(state);
+        Lerp(m, from, to, duration);
     }
 
-    public void ChangeState(IngredientState newState)
+    public static void Lerp(this MonoBehaviour m, Transform from, Transform to, float time)
     {
-        if (state != newState)
-        {
-            state = newState;
-            SwitchObjectForState(state);
-        }
+        m.transform.position = from.position;
+        m.transform.rotation = from.rotation;
+
+        m.StartCoroutine(Lerp(m.transform, to, time));
     }
 
-    private void SwitchObjectForState(IngredientState state)
+    private static IEnumerator Lerp(Transform transform, Transform target, float time)
     {
-        if (rawIngredientModel != null)
+        float elapsedTime = 0;
+        Vector3 startPos = transform.position;
+        Quaternion startRot = transform.rotation;
+
+        while (elapsedTime < time)
         {
-            rawIngredientModel.SetActive(state == IngredientState.Raw);
+            transform.position = Vector3.Lerp(startPos, target.position, elapsedTime / time);
+            transform.rotation = Quaternion.Lerp(startRot, target.rotation, elapsedTime / time);
+            elapsedTime += Time.deltaTime;
+
+            yield return null;
         }
-        if (cleanIngredientModel != null)
-        {
-            cleanIngredientModel.SetActive(state == IngredientState.Clean);
-        }
-        if (choppedIngredientModel != null)
-        {
-            choppedIngredientModel.SetActive(state == IngredientState.Chopped);
-        }
+
+        transform.position = target.position;
+        transform.rotation = target.rotation;
     }
+
 }

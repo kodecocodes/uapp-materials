@@ -28,50 +28,40 @@
  * THE SOFTWARE.
  */
 
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class IngredientObject : MonoBehaviour
+public class ThePass : InteractionObject
 {
-    public enum IngredientType { Carrot, Pepper, Potato, Pea }
-    public enum IngredientState { Raw, Clean, Chopped }
-
-    public IngredientType type;
-    public IngredientState state;
-
     [SerializeField]
-    private GameObject rawIngredientModel;
+    private Transform passIn;
     [SerializeField]
-    private GameObject cleanIngredientModel;
-    [SerializeField]
-    private GameObject choppedIngredientModel;
+    private Transform passOut;
 
-    private void Start()
+    private Plate plate;
+   
+    public override void Interact(PlayerController player)
     {
-        SwitchObjectForState(state);
-    }
-
-    public void ChangeState(IngredientState newState)
-    {
-        if (state != newState)
+        if (player.carriedPlate != null)
         {
-            state = newState;
-            SwitchObjectForState(state);
+            plate = player.carriedPlate;
+            plate.transform.parent = transform;
+            // Check the plate for a dish
+
+            // Move the plate to the pass
+            StartCoroutine(MoveToPass());
+            player.carriedPlate = null;
         }
     }
 
-    private void SwitchObjectForState(IngredientState state)
+    private IEnumerator MoveToPass()
     {
-        if (rawIngredientModel != null)
-        {
-            rawIngredientModel.SetActive(state == IngredientState.Raw);
-        }
-        if (cleanIngredientModel != null)
-        {
-            cleanIngredientModel.SetActive(state == IngredientState.Clean);
-        }
-        if (choppedIngredientModel != null)
-        {
-            choppedIngredientModel.SetActive(state == IngredientState.Chopped);
-        }
+        // first move to plate to the entry of the pass
+        plate.Lerp(plate.transform, passIn, 0.5f);
+        // wait for the lerp to finish
+        yield return new WaitForSeconds(0.5f);
+        // the move the plate through the pass
+        plate.Lerp(passIn, passOut, 2f);
     }
 }

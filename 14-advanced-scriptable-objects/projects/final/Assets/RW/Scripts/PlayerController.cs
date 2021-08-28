@@ -48,6 +48,10 @@ public class PlayerController : MonoBehaviour
     private Workstation sink;
     [SerializeField]
     private PlateStack plateStack;
+    [SerializeField]
+    private ThePass thePass;
+    [HideInInspector]
+    public Plate carriedPlate;
 
     // state for holding something or not
     [SerializeField]
@@ -105,6 +109,10 @@ public class PlayerController : MonoBehaviour
             {
                 CheckPickups();
             }
+            if (carriedPlate != null)
+            {
+                CheckPass();
+            }
             CheckPlate();
         }
     }
@@ -161,6 +169,27 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
+    private bool CheckPass()
+    {
+        if (carriedPlate != null)
+        {
+            carriedPlate.GetComponent<Collider>().enabled = false;
+
+            if (thePass.CanInteract(transform))
+            {
+                holding = false;
+                animator.SetBool("Holding", holding);
+                thePass.Interact(this);
+                return true;
+            }
+            else
+            {
+                carriedPlate.GetComponent<Collider>().enabled = true;
+            }
+        }
+        return false;
+    }
+
     #endregion // Interaction Validators
 
     public void TakeIngredient(IngredientObject newIngredient)
@@ -188,6 +217,7 @@ public class PlayerController : MonoBehaviour
 
     public void TakePlate(Plate plate)
     {
+        carriedPlate = plate;
         plate.transform.SetParent(holdingPosition);
         plate.transform.localPosition = Vector3.zero;
         holding = true;
