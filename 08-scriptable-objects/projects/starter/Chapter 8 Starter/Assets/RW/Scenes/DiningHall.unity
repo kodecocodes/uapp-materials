@@ -28479,7 +28479,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &632710212
 RectTransform:
   m_ObjectHideFlags: 0
@@ -28498,7 +28498,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 80}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 146.74268, y: 47.71987}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &632710213
 MonoBehaviour:
@@ -69837,10 +69837,10 @@ RectTransform:
   m_Father: {fileID: 632710212}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 73.37134, y: -23.859936}
+  m_SizeDelta: {x: 116.742676, y: 17.71987}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1671344261
 MonoBehaviour:
@@ -69875,7 +69875,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Talk to the guard
+  m_Text: Interaction description goes here
 --- !u!222 &1671344262
 CanvasRenderer:
   m_ObjectHideFlags: 0

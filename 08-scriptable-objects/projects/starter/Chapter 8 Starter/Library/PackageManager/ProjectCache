@@ -6,8 +6,8 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637643886342327712
-    m_Hash: 3746440698
+      ticks: 637660438080269538
+    m_Hash: 2175396425
   m_LockFileStatus:
     m_FilePath: S:/Ray Wenderlich/0000_Books/REPO/uapp-materials/08-scriptable-objects/projects/starter/Chapter
       8 Starter/Packages/packages-lock.json
@@ -15,8 +15,8 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637643886342397710
-    m_Hash: 2583074772
+      ticks: 637660438080269538
+    m_Hash: 3767151401
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_PackageAssets:
