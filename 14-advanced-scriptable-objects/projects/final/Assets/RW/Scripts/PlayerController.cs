@@ -28,8 +28,10 @@
  * THE SOFTWARE.
  */
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
@@ -45,6 +47,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Workstation choppingBoard;
     [SerializeField]
+    private Prop knife;
+    [SerializeField]
     private Workstation sink;
     [SerializeField]
     private PlateStack plateStack;
@@ -58,8 +62,8 @@ public class PlayerController : MonoBehaviour
     private bool holding;
     [SerializeField]
     Transform holdingPosition;
-
-    private Vector3 knifePosition = new Vector3(0, 0.577f, 1.61f);
+    [SerializeField]
+    Transform knifePosition;
     // The Ingredient the player is holding
     public IngredientObject ingredient { get; private set; }
 
@@ -123,16 +127,26 @@ public class PlayerController : MonoBehaviour
         {
             if (holding)
             {
-                if (choppingBoard.CanInteract(transform))
+                if (choppingBoard.CanInteract(transform) && ingredient.state == choppingBoard.stateIn)
                 {
                     choppingBoard.Interact(this);
+                    knife.transform.SetParent(knifePosition);
+                    knife.Lerp(knife.transform, knifePosition, 0.33f);
+                    choppingBoard.OnProcessingComplete.AddListener(ReturnKnife);
                 }
-                else if (sink.CanInteract(transform))
+                else if (sink.CanInteract(transform) && ingredient.state == sink.stateIn)
                 {
                     sink.Interact(this);
                 }
             }
         }
+    }
+
+    private void ReturnKnife()
+    {
+        knife.transform.SetParent(knife.defaultPosition);
+        knife.Lerp(knife.transform, knife.defaultPosition, 0.33f);
+        choppingBoard.OnProcessingComplete.RemoveListener(ReturnKnife);
     }
 
     #endregion // Input Actions

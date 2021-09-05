@@ -44,6 +44,7 @@ public class Workstation : InteractionObject
     public Transform processingPosition;
 
     public UnityEvent OnInteract;
+    public UnityEvent OnProcessingComplete;
 
     public float processingTime = 3f;
     private float processedTime = 0f;
@@ -60,6 +61,7 @@ public class Workstation : InteractionObject
     private void ReturnIngredient()
     {
         interactingPlayer.TakeIngredient(processedIngredient);
+        OnProcessingComplete?.Invoke();
     }
 
     public void Process(IngredientObject ingredient)
@@ -68,7 +70,7 @@ public class Workstation : InteractionObject
         {
             interactingPlayer.ToggleMovement(false);
             ingredient.transform.parent = processingPosition;
-            ingredient.Lerp(ingredient.transform, processingPosition);
+            ingredient.Lerp(ingredient.transform, processingPosition, 0.5f);
             processing = true;
             OnInteract?.Invoke();
             if (processedIngredient != ingredient)
