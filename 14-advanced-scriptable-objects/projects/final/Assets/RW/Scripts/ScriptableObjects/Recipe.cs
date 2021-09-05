@@ -37,4 +37,8 @@ public class Recipe : ScriptableObject
 {
     public List<IngredientObject.IngredientType> ingredients;
     public GameObject prefab;
+
+    public ServeEvent serveEvent;
+    public Sprite thumbnail;
+    public int score;
 }

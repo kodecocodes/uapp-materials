@@ -106,6 +106,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ingredient_Carrot Raw
       objectReference: {fileID: 0}
+    - target: {fileID: 2569557071773447840, guid: 31c4594f9ecbd3142a351d57270ac3aa, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31c4594f9ecbd3142a351d57270ac3aa, type: 3}
 --- !u!1 &3975215881179894497 stripped
@@ -173,6 +177,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ingredient_Carrot Chopped
       objectReference: {fileID: 0}
+    - target: {fileID: 7395493310741615857, guid: 917d83e64a2852c4fbf05acc6efad516, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 917d83e64a2852c4fbf05acc6efad516, type: 3}
 --- !u!1 &5606264035795823 stripped
@@ -239,6 +247,10 @@ PrefabInstance:
     - target: {fileID: 2985941448104616537, guid: 70f91fbd72f31ff4ba42c05af46e1001, type: 3}
       propertyPath: m_Name
       value: Ingredient_Carrot Clean
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985941448104616537, guid: 70f91fbd72f31ff4ba42c05af46e1001, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70f91fbd72f31ff4ba42c05af46e1001, type: 3}

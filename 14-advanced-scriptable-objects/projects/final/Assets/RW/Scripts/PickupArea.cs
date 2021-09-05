@@ -40,8 +40,6 @@ public class PickupArea : InteractionObject
     [SerializeField] private List<Transform> spawnPositions;
     [SerializeField] private Transform dropPosition;
 
-    [SerializeField] private IngredientPool publicSupply;
-
     [SerializeField]
     private float spawnRate = 5f;
     private float timeSinceSpawn = 0f;
@@ -69,12 +67,12 @@ public class PickupArea : InteractionObject
         if (availableIngredients.Count < spawnPositions.Count)
         {
             //space for more ingredients
-            IngredientObject newIngredient = publicSupply.Fetch(ingredientType);
+            IngredientObject newIngredient = IngredientPool.Instance.Fetch(ingredientType);
             if (newIngredient != null)
             {
                 availableIngredients.Add(newIngredient);
                 newIngredient.transform.parent = transform;
-                newIngredient.Lerp(dropPosition, spawnPositions[availableIngredients.IndexOf(newIngredient)]);
+                newIngredient.Lerp(dropPosition, spawnPositions[availableIngredients.IndexOf(newIngredient)], 0.5f);
             }
         }
         timeSinceSpawn = 0;

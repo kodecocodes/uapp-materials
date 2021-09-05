@@ -31,40 +31,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class PlateStack : MonoBehaviour
+public class ServeEventListener : MonoBehaviour
 {
-    public Plate availablePlate;
-    [SerializeField] private Plate platePrefab;
+    [SerializeField]
+    private ServeEvent serveEvent;
+    [SerializeField]
+    private UnityEvent response;
 
-    public static PlateStack instance;
-
-    private void Start()
+    private void OnEnable()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(this);
-            return;
-        }
-        if (instance.availablePlate != null)
-        {
-            availablePlate.OnPlateServed.AddListener(Spawn);
-        }
-        else
-        {
-            Spawn();
-        }
+        serveEvent.RegisterListener(this);
     }
 
-    public void Spawn()
+    private void OnDisable()
     {
-        Plate newPlate = Instantiate(platePrefab);
-        newPlate.transform.position = transform.position;
-        newPlate.OnPlateServed.AddListener(Spawn);
-        availablePlate = newPlate;
+        serveEvent.UnregisterListener(this);
+    }
+
+    public void OnEventRaised()
+    {
+        response.Invoke();
     }
 }

@@ -32,10 +32,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Plate : InteractionObject
 {
     [SerializeField] private List<IngredientObject.IngredientType> ingredients;
+    public Recipe Recipe { get; private set; }
+
+    public UnityEvent OnPlateServed;
 
     /// <summary>
     /// The player can either place an ingredient on the plate if they are carrying one, or take the plate
@@ -43,14 +47,17 @@ public class Plate : InteractionObject
     /// <param name="player"></param>
     public override void Interact(PlayerController player)
     {
-        if (player.ingredient != null && player.ingredient.state == IngredientObject.IngredientState.Chopped)
+        if (player.ingredient != null)
         {
-            if (!ingredients.Contains(player.ingredient.type))
+            if (player.ingredient.state == IngredientObject.IngredientState.Chopped)
             {
-                ingredients.Add(player.ingredient.type);
+                if (!ingredients.Contains(player.ingredient.type))
+                {
+                    ingredients.Add(player.ingredient.type);
+                }
+                player.SetIngredient(this);
+                CheckRecipes();
             }
-            player.SetIngredient(this);
-            CheckRecipes();
         }
         else
         {
@@ -63,7 +70,7 @@ public class Plate : InteractionObject
     /// </summary>
     private void CheckRecipes()
     {
-        Recipe recipe = RecipeBook.CheckRecipes(ingredients);
+        Recipe recipe = OrderBook.CheckRecipes(ingredients);
         if (recipe == null)
         {
             // No recipe yet, leave it as it is
@@ -80,6 +87,29 @@ public class Plate : InteractionObject
             dish.transform.SetParent(transform);
             dish.transform.localPosition = Vector3.zero;
             dish.transform.localRotation = Quaternion.identity;
+            Recipe = recipe;
         }
+    }
+
+    public void Serve()
+    {
+        // Check for a recipe
+        if (Recipe != null)
+        {
+            Recipe.serveEvent?.Raise();
+        }
+        else
+        {
+            // Player served a non-recipe dish, award some points
+            OrderBook.instance.Service();
+        }
+        // Return ingredients to the pool
+        foreach (IngredientObject ingredient in transform.GetComponentsInChildren<IngredientObject>(true))
+        {
+            IngredientPool.Instance.Add(ingredient);
+        }
+
+        OnPlateServed?.Invoke();
+        Destroy(gameObject, 1f);
     }
 }

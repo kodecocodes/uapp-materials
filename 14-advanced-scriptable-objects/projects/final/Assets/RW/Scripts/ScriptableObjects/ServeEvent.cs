@@ -32,39 +32,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlateStack : MonoBehaviour
+[CreateAssetMenu(fileName = "New Serve Event", menuName = "Scriptable Objects/Serve Event", order = 52)]
+public class ServeEvent : ScriptableObject
 {
-    public Plate availablePlate;
-    [SerializeField] private Plate platePrefab;
+    private List<ServeEventListener> listeners = new List<ServeEventListener>();
 
-    public static PlateStack instance;
-
-    private void Start()
+    public void Raise()
     {
-        if (instance == null)
+        for(int i = listeners.Count -1; i>=0 ; i--)
         {
-            instance = this;
-        }
-        else
-        {
-            Destroy(this);
-            return;
-        }
-        if (instance.availablePlate != null)
-        {
-            availablePlate.OnPlateServed.AddListener(Spawn);
-        }
-        else
-        {
-            Spawn();
+            listeners[i].OnEventRaised();
         }
     }
 
-    public void Spawn()
+    public void RegisterListener(ServeEventListener listener)
     {
-        Plate newPlate = Instantiate(platePrefab);
-        newPlate.transform.position = transform.position;
-        newPlate.OnPlateServed.AddListener(Spawn);
-        availablePlate = newPlate;
+        listeners.Add(listener);
+    }
+
+    public void UnregisterListener(ServeEventListener listener)
+    {
+        listeners.Remove(listener);
     }
 }

@@ -47,8 +47,6 @@ public class ThePass : InteractionObject
         {
             plate = player.carriedPlate;
             plate.transform.parent = transform;
-            // Check the plate for a dish
-
             // Move the plate to the pass
             StartCoroutine(MoveToPass());
             player.carriedPlate = null;
@@ -63,5 +61,9 @@ public class ThePass : InteractionObject
         yield return new WaitForSeconds(0.5f);
         // the move the plate through the pass
         plate.Lerp(passIn, passOut, 2f);
+        // wait for that lerp
+        yield return new WaitForSeconds(1f);
+        // Check the plate for a dish
+        plate.Serve();
     }
 }

@@ -38,6 +38,18 @@ public class IngredientPool : MonoBehaviour
     [SerializeField]
     private List<IngredientObject> pool;
 
+    public static IngredientPool Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(this);
+            return;
+        }
+        Instance = this;
+    }
+
     /// <summary>
     /// Returns an ingredient from the pool if one is available. Otherwise returns null
     /// </summary>
@@ -67,6 +79,10 @@ public class IngredientPool : MonoBehaviour
         if (poolFilter.Contains(ingredient.type))
         {
             pool.Add(ingredient);
+            ingredient.ChangeState(IngredientObject.IngredientState.Raw);
+            ingredient.transform.position = new Vector3(0, -10, 0);
+            ingredient.gameObject.SetActive(true);
+            ingredient.transform.SetParent(transform);
         }
         else
         {
