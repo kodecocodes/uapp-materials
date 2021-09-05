@@ -42,6 +42,7 @@ public class GameState : MonoBehaviour
 {
     // Assign the empty GameObject that will contain the spawned enemies.
     public GameObject Enemies;
+    public GameObject DestroyedTank;
     private GameObject player;
 
     // Allow to hook-up different spawner sites.
@@ -90,6 +91,7 @@ public class GameState : MonoBehaviour
 
     private void Reset()
     {
+        player.SetActive(true);
         player.GetComponent<PlayerController>().Reset();
         state = States.Countdown;
         timeRemaining = 3;
@@ -108,6 +110,12 @@ public class GameState : MonoBehaviour
             player.GetComponent<NavMeshAgent>().isStopped = true;
             ActivateCamera(zoomCamera);
             UpdateGUI();
+
+            // Replace with destroyed tank.
+            player.SetActive(false);
+            DestroyedTank.transform.position = player.transform.position;
+            DestroyedTank.transform.rotation = player.transform.rotation;
+            DestroyedTank.SetActive(true);
         }
 
         if (state == States.Countdown)
