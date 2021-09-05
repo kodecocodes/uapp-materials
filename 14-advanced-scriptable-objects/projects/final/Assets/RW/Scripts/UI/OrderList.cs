@@ -29,62 +29,61 @@
  */
 
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public static class Tween
+public class OrderList : MonoBehaviour
 {
-    static float duration = 1f;
-    public static void Lerp(this MonoBehaviour m, Transform from, Transform to)
+    public OrderItem orderPrefab;
+
+    private List<OrderItem> orders = new List<OrderItem>();
+
+    private RectTransform rectTransform;
+
+    private void Awake()
     {
-        Lerp(m, from, to, duration);
+        rectTransform = transform as RectTransform;
     }
 
-    public static void Lerp(this MonoBehaviour m, Transform from, Transform to, float time)
+    public void AddItem(Recipe recipe)
     {
-        m.transform.position = from.position;
-        m.transform.rotation = from.rotation;
-
-        m.StartCoroutine(Lerp(m.transform, to, time));
+        OrderItem newOrder = Instantiate(orderPrefab, transform);
+        newOrder.Init(recipe);
+        Vector2 spawnPos = new Vector2(rectTransform.rect.width, 0);// + (transform as RectTransform).sizeDelta.x
+        Vector2 targetPos = rectTransform.anchorMin + new Vector2(120 * orders.Count, 0);
+        newOrder.Lerp(spawnPos, targetPos);
+        orders.Add(newOrder);
     }
 
-    private static IEnumerator Lerp(Transform transform, Transform target, float time)
+    public void RemoveItem(Recipe recipe)
     {
-        float elapsedTime = 0;
-        Vector3 startPos = transform.position;
-        Quaternion startRot = transform.rotation;
-
-        while (elapsedTime < time)
+        for (int i = 0; i < orders.Count; i++)
         {
-            transform.position = Vector3.Lerp(startPos, target.position, elapsedTime / time);
-            transform.rotation = Quaternion.Lerp(startRot, target.rotation, elapsedTime / time);
-            elapsedTime += Time.deltaTime;
-
-            yield return null;
-        }
-
-        transform.position = target.position;
-        transform.rotation = target.rotation;
-    }
-
-    public static void Lerp(this MonoBehaviour m, Vector2 start, Vector2 end, float time = 1f)
-    {
-        if (m.GetComponent<RectTransform>() != null)
-        {
-            m.StartCoroutine(Lerp(m.GetComponent<RectTransform>(), start, end, time));
+            if (orders[i].Recipe == recipe)
+            {
+                OrderItem toRemove = orders[i];
+                toRemove.Lerp((toRemove.transform as RectTransform).anchoredPosition, new Vector2(-1000, 0));
+                orders.RemoveAt(i);
+                StartCoroutine(DelayedCleanUp(toRemove.gameObject, 1f));
+                Shuffle();
+                return;
+            }
         }
     }
 
-    private static IEnumerator Lerp(RectTransform rt, Vector2 start, Vector2 end, float time)
+    private IEnumerator DelayedCleanUp(GameObject g, float time)
     {
-        float elapsedTime = 0;
-        rt.anchoredPosition = start;
+        yield return new WaitForSeconds(time);
+        Destroy(g);
+    }
 
-        while (elapsedTime < time)
+    private void Shuffle()
+    {
+        for (int i = 0; i < orders.Count; i++)
         {
-            rt.anchoredPosition = Vector2.LerpUnclamped(start, end, elapsedTime / time);
-            elapsedTime += Time.deltaTime;
-
-            yield return null;
+            Vector2 position = orders[i].rectTransform.anchoredPosition;
+            Vector2 targetPos = rectTransform.anchorMin + new Vector2(120 * i, 0);
+            orders[i].Lerp(position, targetPos);
         }
     }
 }

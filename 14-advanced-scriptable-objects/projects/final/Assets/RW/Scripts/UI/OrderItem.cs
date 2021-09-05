@@ -29,62 +29,31 @@
  */
 
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public static class Tween
+public class OrderItem : MonoBehaviour
 {
-    static float duration = 1f;
-    public static void Lerp(this MonoBehaviour m, Transform from, Transform to)
+    [SerializeField]
+    private Image thumbnail;
+    public Recipe Recipe { get; private set; }
+    public RectTransform rectTransform { get; private set; }
+
+    private void Awake()
     {
-        Lerp(m, from, to, duration);
+        rectTransform = transform as RectTransform;
     }
 
-    public static void Lerp(this MonoBehaviour m, Transform from, Transform to, float time)
+    public void Init(Recipe recipe)
     {
-        m.transform.position = from.position;
-        m.transform.rotation = from.rotation;
-
-        m.StartCoroutine(Lerp(m.transform, to, time));
-    }
-
-    private static IEnumerator Lerp(Transform transform, Transform target, float time)
-    {
-        float elapsedTime = 0;
-        Vector3 startPos = transform.position;
-        Quaternion startRot = transform.rotation;
-
-        while (elapsedTime < time)
+        if (recipe != null)
         {
-            transform.position = Vector3.Lerp(startPos, target.position, elapsedTime / time);
-            transform.rotation = Quaternion.Lerp(startRot, target.rotation, elapsedTime / time);
-            elapsedTime += Time.deltaTime;
-
-            yield return null;
-        }
-
-        transform.position = target.position;
-        transform.rotation = target.rotation;
-    }
-
-    public static void Lerp(this MonoBehaviour m, Vector2 start, Vector2 end, float time = 1f)
-    {
-        if (m.GetComponent<RectTransform>() != null)
-        {
-            m.StartCoroutine(Lerp(m.GetComponent<RectTransform>(), start, end, time));
-        }
-    }
-
-    private static IEnumerator Lerp(RectTransform rt, Vector2 start, Vector2 end, float time)
-    {
-        float elapsedTime = 0;
-        rt.anchoredPosition = start;
-
-        while (elapsedTime < time)
-        {
-            rt.anchoredPosition = Vector2.LerpUnclamped(start, end, elapsedTime / time);
-            elapsedTime += Time.deltaTime;
-
-            yield return null;
+            Recipe = recipe;
+            if (recipe.thumbnail != null)
+            {
+                thumbnail.sprite = recipe.thumbnail;
+            }
         }
     }
 }
