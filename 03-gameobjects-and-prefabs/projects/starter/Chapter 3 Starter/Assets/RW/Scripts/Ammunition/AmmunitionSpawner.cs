@@ -4,7 +4,7 @@ using System;
 
 public class AmmunitionSpawner : MonoBehaviour
 {
-    public UIManager uiManager;
+    // public UIManager uiManager;
 
     public Transform spawnPoint;
     public Transform ammunitionParent;
@@ -18,7 +18,7 @@ public class AmmunitionSpawner : MonoBehaviour
 
     private void Start()
     {
-        uiManager.InitialSetup(timeInSecondsBetweenCanSpawn);
+        // uiManager.InitialSetup(timeInSecondsBetweenCanSpawn);
     }
 
     public void AttemptAmmunitionSpawn()
@@ -38,7 +38,7 @@ public class AmmunitionSpawner : MonoBehaviour
 
         amountOfAmmunitionSpawned++;
 
-        uiManager.UpdateAmmunitionText(amountOfAmmunitionSpawned);
+        // uiManager.UpdateAmmunitionText(amountOfAmmunitionSpawned);
         AudioSource.PlayClipAtPoint(ammunitionCreationSound, Camera.main.transform.position);
         smokeParticles.Play();
     }
@@ -47,6 +47,6 @@ public class AmmunitionSpawner : MonoBehaviour
     {
         spawnTimer += Time.deltaTime;
         spawnTimer = Mathf.Clamp(spawnTimer, 0, timeInSecondsBetweenCanSpawn);
-        uiManager.UpdateAmmunitionTimerValue(spawnTimer);
+        // uiManager.UpdateAmmunitionTimerValue(spawnTimer);
     }
 }
