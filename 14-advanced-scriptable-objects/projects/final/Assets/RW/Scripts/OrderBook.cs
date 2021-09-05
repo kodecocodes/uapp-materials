@@ -28,15 +28,32 @@
  * THE SOFTWARE.
  */
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class RecipeBook : MonoBehaviour
+public class OrderBook : MonoBehaviour
 {
+    [Serializable]
+    public class RecipeEvent : UnityEvent<Recipe> { }
+    [Serializable]
+    public class StringEvent : UnityEvent<string> { }
+
     public List<Recipe> recipes;
 
-    public static RecipeBook instance;
+    public static OrderBook instance;
+
+    private List<Recipe> orders = new List<Recipe>();
+    private int score;
+    private float orderFrequency = 10f;
+    private float timeSinceLastOrder = 0f;
+    private int maxOrders = 4;
+
+    public RecipeEvent OnOrderCreated;
+    public RecipeEvent OnOrderFilled;
+    public StringEvent OnScoreUpdated;
 
     private void Start()
     {
@@ -47,6 +64,9 @@ public class RecipeBook : MonoBehaviour
             {
                 recipe.ingredients.Sort();
             }
+            OnScoreUpdated?.Invoke(score.ToString());
+            CreateOrder();
+            maxOrders = recipes.Count + 1;
         }
         else
         {
@@ -62,7 +82,7 @@ public class RecipeBook : MonoBehaviour
             bool match = true;
             foreach (IngredientObject.IngredientType type in recipe.ingredients)
             {
-                Debug.LogFormat("Check {0} on plate? {1}", type, ingredients.Contains(type));
+                //Debug.LogFormat("Check {0} on plate? {1}", type, ingredients.Contains(type));
                 if (!ingredients.Contains(type))
                 {
                     match = false;
@@ -76,5 +96,52 @@ public class RecipeBook : MonoBehaviour
         }
 
         return null;
+    }
+
+    public void CreateOrder()
+    {
+        Recipe newOrder = recipes[0];
+        orders.Add(newOrder);
+        OnOrderCreated?.Invoke(newOrder);
+    }
+
+    public void Service(Recipe recipe)
+    {
+        if (instance.orders != null && instance.orders.Count > 0)
+        {
+            if (instance.orders.Contains(recipe))
+            {
+                instance.orders.Remove(recipe);
+                OnOrderFilled?.Invoke(recipe);
+                score += recipe.score;
+            }
+            else
+            {
+                score += 5;
+            }
+        }
+        OnScoreUpdated?.Invoke(score.ToString());
+    }
+
+    public void Service()
+    {
+        score += 5;
+        OnScoreUpdated?.Invoke(score.ToString());
+    }
+
+    private void Update()
+    {
+        if (orders.Count < maxOrders)
+        {
+            if (timeSinceLastOrder < orderFrequency)
+            {
+                timeSinceLastOrder += Time.deltaTime;
+            }
+            else
+            {
+                CreateOrder();
+                timeSinceLastOrder = 0;
+            }
+        }
     }
 }
