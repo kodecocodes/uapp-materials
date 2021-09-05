@@ -6,8 +6,8 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637633349291436153
-    m_Hash: 3641366868
+      ticks: 637664442553971302
+    m_Hash: 2147871502
   m_LockFileStatus:
     m_FilePath: S:/Ray Wenderlich/0000_Books/REPO/uapp-materials/04-creating-and-using-scripts-with-c-sharp/projects/starter/Chapter
       4 Starter/Packages/packages-lock.json
@@ -15,8 +15,8 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637633349294936143
-    m_Hash: 604082436
+      ticks: 637664442553971302
+    m_Hash: 1142212036
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_PackageAssets:
@@ -252,6 +252,7 @@ m_PackageAssets:
         - 1.2.1
         - 1.2.2
         - 1.2.3
+        - 1.2.4
         compatible:
         - 1.0.2
         - 1.0.3
@@ -264,7 +265,8 @@ m_PackageAssets:
         - 1.2.1
         - 1.2.2
         - 1.2.3
-        verified: 1.2.3
+        - 1.2.4
+        verified: 1.2.4
       dependencies: []
       resolvedDependencies: []
       keywords: []
@@ -2178,10 +2180,12 @@ m_PackageAssets:
         - 1.1.24
         - 1.1.26
         - 1.1.27
+        - 1.1.29
         compatible:
         - 1.1.26
         - 1.1.27
-        verified: 1.1.27
+        - 1.1.29
+        verified: 1.1.29
       dependencies:
       - name: com.unity.ext.nunit
         version: 1.0.6
