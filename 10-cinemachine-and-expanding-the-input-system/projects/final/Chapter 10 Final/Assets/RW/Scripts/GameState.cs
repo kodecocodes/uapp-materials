@@ -30,6 +30,7 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
+using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -56,6 +57,29 @@ public class GameState : MonoBehaviour
     private States state;
     private float timeRemaining = 0;
 
+    // Priority of the cameras (2 makes active)
+    const int lowPriority = 1;
+    const int highPriority = 2;
+    const int spawnTimer = 5;
+
+    // Zoom camera
+    public CinemachineVirtualCamera zoomCamera;
+    public CinemachineVirtualCamera gameCamera;
+
+    // Gate Cameras, same order as GateSpawners
+    public List<CinemachineVirtualCamera> gateCameras;
+
+    public void ActivateCamera(CinemachineVirtualCamera camera)
+    {
+        zoomCamera.Priority = lowPriority;
+        gameCamera.Priority = lowPriority;
+        foreach (CinemachineVirtualCamera c in gateCameras) {
+            c.Priority = lowPriority;
+        }
+        camera.Priority = highPriority;
+        camera.MoveToTopOfPrioritySubqueue();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -70,6 +94,7 @@ public class GameState : MonoBehaviour
         state = States.Countdown;
         timeRemaining = 3;
         UpdateGUI();
+        ActivateCamera(zoomCamera);
     }
 
     // Update is called once per frame
@@ -81,6 +106,7 @@ public class GameState : MonoBehaviour
         {
             state = States.Lose;
             player.GetComponent<NavMeshAgent>().isStopped = true;
+            ActivateCamera(zoomCamera);
             UpdateGUI();
         }
 
@@ -97,8 +123,15 @@ public class GameState : MonoBehaviour
 
         if (state == States.Fight)
         {
+            // Create initial enemies and zoom.
+            int gate = 0;
+            GateSpawner g = spawners[gate];
+            g.SpawnEnemies(5);
+            ActivateCamera(gateCameras[gate]);
+
             if (timeRemaining < 0)
             {
+                ActivateCamera(gameCamera);
                 state = States.Battle;
                 UpdateGUI();
             }
@@ -115,8 +148,6 @@ public class GameState : MonoBehaviour
 
                 GateSpawner g = spawners[index];
                 g.SpawnEnemies(spawnCount);
-
-                timeRemaining = 2;
             }
             UpdateGUI();
         }
