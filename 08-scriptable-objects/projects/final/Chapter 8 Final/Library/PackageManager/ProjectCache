@@ -6,7 +6,7 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637660438063279550
+      ticks: 637664651633814394
     m_Hash: 2175396425
   m_LockFileStatus:
     m_FilePath: S:/Ray Wenderlich/0000_Books/REPO/uapp-materials/08-scriptable-objects/projects/final/Chapter
@@ -15,7 +15,7 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637660438063279550
+      ticks: 637664651633814394
     m_Hash: 3767151401
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
@@ -252,6 +252,7 @@ m_PackageAssets:
         - 1.2.1
         - 1.2.2
         - 1.2.3
+        - 1.2.4
         compatible:
         - 1.0.2
         - 1.0.3
@@ -264,7 +265,8 @@ m_PackageAssets:
         - 1.2.1
         - 1.2.2
         - 1.2.3
-        verified: 1.2.3
+        - 1.2.4
+        verified: 1.2.4
       dependencies: []
       resolvedDependencies: []
       keywords: []
