@@ -294,15 +294,15 @@ DerivedData/
 #
 [Ll]ibrary/
 [Tt]emp/
-/[Oo]bj/
-/[Bb]uild/
-/[Bb]uilds/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
 [Ll]ogs/
-/[Uu]ser[Ss]ettings/
+[Uu]ser[Ss]ettings/
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
-/[Mm]emoryCaptures/
+[Mm]emoryCaptures/
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
