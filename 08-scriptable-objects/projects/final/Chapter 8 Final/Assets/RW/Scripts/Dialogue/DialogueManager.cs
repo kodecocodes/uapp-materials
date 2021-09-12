@@ -164,7 +164,7 @@ public class DialogueManager : MonoBehaviour
         {
             if (currentLine.exitGameAfterConversation)
             {
-                SceneManager.LoadScene("Game End");
+                SceneManager.LoadScene("Title");
             }
             else
             {
