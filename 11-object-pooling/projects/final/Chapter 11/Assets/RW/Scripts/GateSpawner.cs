@@ -36,7 +36,10 @@ using UnityEngine;
 
 public class GateSpawner : MonoBehaviour
 {
-    public GameObject Enemy;
+    // Replace the Prefab with the EnemyPool.
+    // public GameObject Enemy;
+    public ObjectPool EnemyPool;
+
     public GameObject Gate;
     public GameObject Container;
     public float height = 5;
@@ -87,10 +90,15 @@ public class GateSpawner : MonoBehaviour
         {
             for (int i = 0; i < number; i++)
             {
-                GameObject enemy = Instantiate(Enemy, Gate.transform.parent);
-                Vector3 forward = Gate.transform.forward;
-                enemy.transform.localPosition = new Vector3(0, 0, 0);
-                enemy.transform.parent = Container.transform;
+                // GameObject enemy = Instantiate(Enemy, Gate.transform.parent);
+                GameObject prefab = EnemyPool.Get();
+                if (prefab != null)
+                {
+                    GameObject enemy = Instantiate(prefab, Gate.transform.parent);
+                    Vector3 forward = Gate.transform.forward;
+                    enemy.transform.localPosition = new Vector3(0, 0, 0);
+                    enemy.transform.parent = Container.transform;
+                }
             }
             state = State.Raising;
         }
