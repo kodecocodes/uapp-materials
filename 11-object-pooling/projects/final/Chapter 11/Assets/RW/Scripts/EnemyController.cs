@@ -37,6 +37,8 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
+    public ObjectPool EnemyPool;
+
     Animator characterAnimator;
     NavMeshAgent agent;
     GameObject player;
@@ -106,9 +108,24 @@ public class EnemyController : MonoBehaviour
         {
             // trigger the character death.
             characterAnimator.SetBool("Death", true);
-            Destroy(gameObject, 5);
+            // Destroy(gameObject, 5);
             state = States.Dead;
-            agent.isStopped = true;
+            if (agent.isActiveAndEnabled)
+            {
+                agent.isStopped = true;
+            }
+            StartCoroutine(DieCoroutine()); 
+        }
+    }
+
+    IEnumerator DieCoroutine()
+    {    
+        yield return new WaitForSeconds(5);
+        if (EnemyPool)
+        {
+            state = States.Ready;
+            characterAnimator.SetBool("Death", false);
+            EnemyPool.Return(gameObject);
         }
     }
 }

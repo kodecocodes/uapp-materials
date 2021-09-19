@@ -36,6 +36,9 @@ using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
 {
+    // Where to hold in hierarchy
+    public GameObject Parent;
+
     // DesiredPoolSize
     public int PoolSize;
 
@@ -52,7 +55,7 @@ public class ObjectPool : MonoBehaviour
         for (int i = 1; i <= PoolSize; i++)
         {
             int index = j++;
-            GameObject poolMember = Instantiate(Prefabs[index]);
+            GameObject poolMember = Instantiate(Prefabs[index], Parent.transform);
             poolMember.SetActive(false);
             pool.Enqueue(poolMember);
             if (j == Prefabs.Length)

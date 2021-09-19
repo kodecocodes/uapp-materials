@@ -40,7 +40,7 @@ using UnityEngine.InputSystem.Controls;
 public class PlayerController : MonoBehaviour
 {
     NavMeshAgent agent;
-    public GameObject projectile;
+    public ObjectPool ProjectilePool;
     public float launchVelocity = 700f;
 
     // To rotate a turret to target an enemy
@@ -114,8 +114,16 @@ public class PlayerController : MonoBehaviour
 
         // Where the projectile is started and directed.
         Transform cannon = turretVertical.transform;
-        GameObject fork = Instantiate(projectile, cannon.position, cannon.rotation);
-        fork.GetComponent<Rigidbody>().AddForce(velocity);
+        // Get a projectile from the pool.
+        GameObject projectile = ProjectilePool.Get();
+        if (projectile)
+        {
+            ProjectileBehaviour projectileBehaviour = projectile.GetComponent<ProjectileBehaviour>();
+            projectileBehaviour.ProjectilePool = ProjectilePool;
+            GameObject fork = Instantiate(projectile, cannon.position, cannon.rotation);
+            fork.GetComponent<Rigidbody>().AddForce(velocity);
+            StartCoroutine(projectileBehaviour.ExpireCoroutine());
+        }
     }
 
     public void DamagePlayer()
