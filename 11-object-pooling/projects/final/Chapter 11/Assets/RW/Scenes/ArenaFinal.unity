@@ -611,8 +611,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5effc02bc0ff5246a39df07fdc7419d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 303495311}
-  PoolSize: 10
+  PoolSize: 50
   Prefabs:
   - {fileID: 26244155050421202, guid: cabc34e16464caa4e878add6577bcd17, type: 3}
   - {fileID: 6662007170358211656, guid: 63d1013973144884593447a18709d1a2, type: 3}
@@ -2338,8 +2337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5effc02bc0ff5246a39df07fdc7419d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 1365742417}
-  PoolSize: 10
+  PoolSize: 30
   Prefabs:
   - {fileID: 4798957048582393662, guid: 807a2ab50dab7074c8e04a848fc0af3c, type: 3}
 --- !u!4 &1396923696 stripped
@@ -2986,7 +2984,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1613256645}
-  m_LocalRotation: {x: -0.023667676, y: 0.9228327, z: -0.3801562, w: -0.057453502}
+  m_LocalRotation: {x: -0.02366766, y: 0.9228327, z: -0.3801562, w: -0.057453465}
   m_LocalPosition: {x: 7.6287055, y: 0.30986786, z: -31.66716}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
