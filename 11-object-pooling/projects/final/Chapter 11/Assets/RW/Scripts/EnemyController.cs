@@ -54,35 +54,39 @@ public class EnemyController : MonoBehaviour, IPoolable
         player = GameObject.Find("Tank");
     }
 
+    // Enable ensures that the agent is on the NavMesh.
+    public void Enable()
+    {
+        NavMeshHit closestHit;
+        if (NavMesh.SamplePosition(transform.position, out closestHit, 500, 1))
+        {
+            transform.position = closestHit.position;
+        }
+        gameObject.SetActive(true);
+        gameObject.GetComponent<NavMeshAgent>().enabled = true;
+    }
+
     // Update is called once per frame
     void Update()
     {
         if (state == States.Ready)
         {
-            if (!agent.isOnNavMesh)
-            {
-                agent.enabled = false;
-                agent.enabled = true;
-            } 
-            else
-            {
-                agent.SetDestination(player.transform.position);
-                characterAnimator.SetFloat("Speed", agent.velocity.magnitude);
+            agent.SetDestination(player.transform.position);
+            characterAnimator.SetFloat("Speed", agent.velocity.magnitude);
 
                 
-                if (agent.remainingDistance < 5.0f)
-                {
-                    agent.isStopped = true;
-                    characterAnimator.SetBool("Attack", true);
+            if (agent.remainingDistance < 5.0f)
+            {
+                agent.isStopped = true;
+                characterAnimator.SetBool("Attack", true);
 
-                    state = States.Attack;
-                    timeRemaining = 1f;
+                state = States.Attack;
+                timeRemaining = 1f;
              
-                } else
-                {
-                    agent.isStopped = false;
-                    characterAnimator.SetBool("Attack", false);
-                }
+            } else
+            {
+                agent.isStopped = false;
+                characterAnimator.SetBool("Attack", false);
             }
         }
         if (state == States.Attack)
@@ -118,6 +122,7 @@ public class EnemyController : MonoBehaviour, IPoolable
 
     IEnumerator DieCoroutine()
     {    
+        // Death should return object to the pool.
         yield return new WaitForSeconds(5);
         if (EnemyPool)
         {
@@ -137,14 +142,16 @@ public class EnemyController : MonoBehaviour, IPoolable
 
     public void Reset()
     {
+        // Reset should clear any states to ready.
         state = States.Ready;
-        gameObject.SetActive(true);
         characterAnimator.SetBool("Death", false);
     }
 
     public void Deactivate()
     {
+        // Deactivate should pause the agent and deactivate the object.
         agent.isStopped = true;
         gameObject.SetActive(false);
+        gameObject.GetComponent<NavMeshAgent>().enabled = false;
     }
 }

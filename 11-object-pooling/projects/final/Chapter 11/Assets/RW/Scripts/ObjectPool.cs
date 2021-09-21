@@ -47,7 +47,7 @@ public class ObjectPool : MonoBehaviour
 
     public void Awake()
     {
-        // Attempt to automatically instantiate the pool from Prefabs.
+        // Automatically instantiate the pool from Prefabs.
         int j = 0;
         for (int i = 1; i <= PoolSize; i++)
         {
