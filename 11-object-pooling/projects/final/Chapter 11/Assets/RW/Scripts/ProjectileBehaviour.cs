@@ -2,22 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileBehaviour : MonoBehaviour
+public class ProjectileBehaviour : MonoBehaviour, IPoolable
 {
     // Needed to return a projectile back to it's pool.
-    public ObjectPool ProjectilePool;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    ObjectPool ProjectilePool;
 
     public IEnumerator ExpireCoroutine()
     {
@@ -26,5 +14,27 @@ public class ProjectileBehaviour : MonoBehaviour
         {
             ProjectilePool.Return(gameObject);
         }
+    }
+
+    public void SetPool(ObjectPool pool)
+    {
+        ProjectilePool = pool;
+    }
+
+    public ObjectPool GetPool()
+    {
+        return ProjectilePool;
+    }
+
+    public void Reset()
+    {
+        gameObject.SetActive(true);
+        gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+        StartCoroutine(ExpireCoroutine());
+    }
+
+    public void Deactivate()
+    {
+        gameObject.SetActive(false);
     }
 }

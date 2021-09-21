@@ -35,10 +35,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : MonoBehaviour, IPoolable
 {
-    public ObjectPool EnemyPool;
-
+    ObjectPool EnemyPool;
     Animator characterAnimator;
     NavMeshAgent agent;
     GameObject player;
@@ -47,8 +46,7 @@ public class EnemyController : MonoBehaviour
     private States state;
     private float timeRemaining = 0;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         state = States.Ready;
         characterAnimator = GetComponent<Animator>();
@@ -123,9 +121,30 @@ public class EnemyController : MonoBehaviour
         yield return new WaitForSeconds(5);
         if (EnemyPool)
         {
-            state = States.Ready;
-            characterAnimator.SetBool("Death", false);
             EnemyPool.Return(gameObject);
         }
+    }
+
+    public void SetPool(ObjectPool pool)
+    {
+        EnemyPool = pool;
+    }
+
+    public ObjectPool GetPool()
+    {
+        return EnemyPool;
+    }
+
+    public void Reset()
+    {
+        state = States.Ready;
+        gameObject.SetActive(true);
+        characterAnimator.SetBool("Death", false);
+    }
+
+    public void Deactivate()
+    {
+        agent.isStopped = true;
+        gameObject.SetActive(false);
     }
 }

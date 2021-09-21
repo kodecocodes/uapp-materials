@@ -77,12 +77,12 @@ public class PlayerController : MonoBehaviour
     public void OnMove()
     {
         RaycastHit hit;
-        Debug.Log("Try to move to a new position");
+        //Debug.Log("Try to move to a new position");
 
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue()), out hit, 100))
         {
             agent.destination = hit.point;
-            Debug.Log("Moving to a new position");
+            //Debug.Log("Moving to a new position");
         }
     }
 
@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour
         float x =  Mouse.current.position.x.ReadValue();
         float y = Mouse.current.position.y.ReadValue();
 
-        Debug.Log("Fire at mouse " + x + ", " + y);
+        //Debug.Log("Fire at mouse " + x + ", " + y);
 
         // Next, ray trace to find where on the map the player clicked.
         // https://docs.unity3d.com/ScriptReference/Camera.ScreenToWorldPoint.html
@@ -118,11 +118,9 @@ public class PlayerController : MonoBehaviour
         GameObject projectile = ProjectilePool.Get();
         if (projectile)
         {
-            ProjectileBehaviour projectileBehaviour = projectile.GetComponent<ProjectileBehaviour>();
-            projectileBehaviour.ProjectilePool = ProjectilePool;
-            GameObject fork = Instantiate(projectile, cannon.position, cannon.rotation);
-            fork.GetComponent<Rigidbody>().AddForce(velocity);
-            StartCoroutine(projectileBehaviour.ExpireCoroutine());
+            projectile.transform.position = cannon.position;
+            projectile.transform.rotation = cannon.rotation;
+            projectile.GetComponent<Rigidbody>().AddForce(velocity);
         }
     }
 

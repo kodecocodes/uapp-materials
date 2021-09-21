@@ -36,9 +36,6 @@ using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
 {
-    // Where to hold in hierarchy
-    public GameObject Parent;
-
     // DesiredPoolSize
     public int PoolSize;
 
@@ -55,8 +52,13 @@ public class ObjectPool : MonoBehaviour
         for (int i = 1; i <= PoolSize; i++)
         {
             int index = j++;
-            GameObject poolMember = Instantiate(Prefabs[index], Parent.transform);
+            GameObject poolMember = Instantiate(Prefabs[index], transform);
             poolMember.SetActive(false);
+            IPoolable[] poolableList = poolMember.GetComponents<IPoolable>();
+            foreach (IPoolable poolable in poolableList)
+            {
+                poolable.SetPool(this);
+            }
             pool.Enqueue(poolMember);
             if (j == Prefabs.Length)
             {
@@ -68,6 +70,11 @@ public class ObjectPool : MonoBehaviour
     // Add another GameObject to the managed pool.
     public void Add(GameObject anObject)
     {
+        IPoolable[] poolableList = anObject.GetComponents<IPoolable>();
+        foreach (IPoolable poolable in poolableList)
+        {
+            poolable.SetPool(this);
+        }
         pool.Enqueue(anObject);
     }
 
@@ -77,7 +84,7 @@ public class ObjectPool : MonoBehaviour
         if (pool.Count > 0)
         {
             GameObject toReturn = pool.Dequeue();
-            toReturn.SetActive(true);
+            toReturn.GetComponent<IPoolable>().Reset();
             return toReturn;
         }
         return null;
@@ -86,7 +93,10 @@ public class ObjectPool : MonoBehaviour
     public void Return(GameObject anObject)
     {
         // Return an object back to the pool.
-        anObject.SetActive(false);
+        IPoolable[] poolableList = anObject.GetComponents<IPoolable>();
+        foreach (IPoolable poolable in poolableList) { 
+            poolable.Deactivate();
+        }
         pool.Enqueue(anObject);
     }
 

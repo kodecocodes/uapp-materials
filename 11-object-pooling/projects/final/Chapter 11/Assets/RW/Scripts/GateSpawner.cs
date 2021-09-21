@@ -96,8 +96,6 @@ public class GateSpawner : MonoBehaviour
                 {
                     Vector3 forward = Gate.transform.forward;
                     enemy.transform.localPosition = new Vector3(0, 0, 0);
-                    enemy.transform.parent = Container.transform;
-                    enemy.GetComponent<EnemyController>().EnemyPool = EnemyPool;
                 }
             }
             state = State.Raising;
