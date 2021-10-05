@@ -99,7 +99,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 
-      objectReference: {fileID: 2100000, guid: f12c337954ddd774abae2a04668fc398, type: 2}
+      objectReference: {fileID: 2100000, guid: 37e4d24cf3d4dc943b8f2ed154289509, type: 2}
     - target: {fileID: -1504981713932161579, guid: c5b64dd7148ed36498e80f7616412546,
         type: 3}
       propertyPath: m_Materials.Array.data[3]
@@ -113,7 +113,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: c5b64dd7148ed36498e80f7616412546,
         type: 3}
       propertyPath: m_Name
-      value: GateWall
+      value: GateWall Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5b64dd7148ed36498e80f7616412546, type: 3}
