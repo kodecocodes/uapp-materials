@@ -8,6 +8,6 @@ public class RotateAround : MonoBehaviour
 
     private void Update()
     {
-        gameObject.transform.Rotate(rotationSpeed, rotationSpace);
+        transform.Rotate(rotationSpeed * Time.deltaTime, rotationSpace);
     }
 }

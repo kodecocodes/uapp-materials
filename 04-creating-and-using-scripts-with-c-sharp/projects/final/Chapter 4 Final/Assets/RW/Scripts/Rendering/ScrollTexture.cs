@@ -16,7 +16,7 @@ public class ScrollTexture : MonoBehaviour
 
     private void Update()
     {
-        offset = Time.time * scrollSpeed;
+        offset += Time.deltaTime * scrollSpeed;
         rend.material.SetTextureOffset("_MainTex", offset);
     }
 }
