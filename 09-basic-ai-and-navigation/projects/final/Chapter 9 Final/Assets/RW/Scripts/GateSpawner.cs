@@ -36,21 +36,22 @@ using UnityEngine;
 
 public class GateSpawner : MonoBehaviour
 {
-    public GameObject Enemy;
+    public GameObject EnemyPrefab;
     public GameObject Gate;
-    public GameObject Container;
     public float height = 5;
     public float offset = 0;
 
     private enum State { Ready, Raising, Lowering};
     private State state;
     public Vector3 origin;
+    private GameObject Container;
 
     // Start is called before the first frame update
     void Start()
     {
         state = State.Ready;
         origin = Gate.transform.position;
+        Container = GameObject.Find("Enemies");
     }
 
     // Update is called once per frame
@@ -62,7 +63,8 @@ public class GateSpawner : MonoBehaviour
             {
                 offset += Time.deltaTime;
                 Gate.transform.Translate(new Vector3(0, 0, Time.deltaTime));
-            } else
+            }
+            else
             {
                 state = State.Lowering;
             }
@@ -74,7 +76,8 @@ public class GateSpawner : MonoBehaviour
             {
                 offset -= Time.deltaTime;
                 Gate.transform.Translate(new Vector3(0, 0, -Time.deltaTime));
-            } else
+            }
+            else
             {
                 state = State.Ready;
             }
@@ -87,10 +90,11 @@ public class GateSpawner : MonoBehaviour
         {
             for (int i = 0; i < number; i++)
             {
-                GameObject enemy = Instantiate(Enemy, Gate.transform.parent);
+                GameObject enemy = Instantiate(EnemyPrefab, Gate.transform.parent);
                 Vector3 forward = Gate.transform.forward;
                 enemy.transform.localPosition = new Vector3(0, 0, 0);
                 enemy.transform.parent = Container.transform;
+                enemy.GetComponent<EnemyController>().Enable();
             }
             state = State.Raising;
         }

@@ -46,12 +46,25 @@ public class EnemyController : MonoBehaviour
     private float timeRemaining = 0;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         state = States.Ready;
         characterAnimator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.Find("Tank");
+        agent.enabled = false;
+    }
+
+    // Enable ensures that the agent is on the NavMesh.
+    public void Enable()
+    {
+        NavMeshHit closestHit;
+        if (NavMesh.SamplePosition(transform.position, out closestHit, 500, 1))
+        {
+            transform.position = closestHit.position;
+        }
+        gameObject.SetActive(true);
+        gameObject.GetComponent<NavMeshAgent>().enabled = true;
     }
 
     // Update is called once per frame
@@ -59,30 +72,24 @@ public class EnemyController : MonoBehaviour
     {
         if (state == States.Ready)
         {
-            if (!agent.isOnNavMesh)
+            // 1. Set the destination as the player
+            agent.SetDestination(player.transform.position);
+            characterAnimator.SetFloat("Speed", agent.velocity.magnitude);
+
+            // 2. Stop when close and animate an attack
+            if (agent.remainingDistance < 5.0f)
             {
-                agent.enabled = false;
-                agent.enabled = true;
-            } 
+                agent.isStopped = true;
+                characterAnimator.SetBool("Attack", true);
+
+                state = States.Attack;
+                timeRemaining = 1f;
+
+            }
             else
             {
-                agent.SetDestination(player.transform.position);
-                characterAnimator.SetFloat("Speed", agent.velocity.magnitude);
-
-                
-                if (agent.remainingDistance < 5.0f)
-                {
-                    agent.isStopped = true;
-                    characterAnimator.SetBool("Attack", true);
-
-                    state = States.Attack;
-                    timeRemaining = 1f;
-             
-                } else
-                {
-                    agent.isStopped = false;
-                    characterAnimator.SetBool("Attack", false);
-                }
+                agent.isStopped = false;
+                characterAnimator.SetBool("Attack", false);
             }
         }
         if (state == States.Attack)

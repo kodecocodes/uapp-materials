@@ -1,28 +1,38 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!195 &1396923694
-NavMeshAgent:
+--- !u!65 &8240230497777275204
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5357900232648433329}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.593093, y: 4.655259, z: 2.6657}
+  m_Center: {x: 0.0000002384186, y: -0.49107337, z: 0.7103379}
+--- !u!114 &2180994864680464875
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9098866933730397752}
   m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 7
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 720
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
---- !u!114 &1396923698
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17661dd498447ee41b9c84a0d76c8015, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 4798957048582393662, guid: 807a2ab50dab7074c8e04a848fc0af3c,
+    type: 3}
+  launchVelocity: 700
+  turretVertical: {fileID: 0}
+  turretHorizontal: {fileID: 0}
+  health: 1000
+  fullHealth: 1000
+--- !u!114 &3129153930546807862
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -53,38 +63,28 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &4112407254294349544
-MonoBehaviour:
+--- !u!195 &4027889108946734555
+NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9098866933730397752}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17661dd498447ee41b9c84a0d76c8015, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectile: {fileID: 4798957048582393662, guid: 807a2ab50dab7074c8e04a848fc0af3c,
-    type: 3}
-  launchVelocity: 700
-  turretVertical: {fileID: 7489752911954660796}
-  turretHorizontal: {fileID: 7283559971764592661}
-  health: 1000
-  fullHealth: 1000
---- !u!65 &8240230497777275204
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5357900232648433329}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.593093, y: 4.655259, z: 2.6657}
-  m_Center: {x: 0.0000002384186, y: -0.49107337, z: 0.7103379}
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 7
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 720
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1001 &964973541881747249
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -225,7 +225,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 75dca2b123e6d69498bb9230d6f6d531,
         type: 3}
       propertyPath: m_Name
-      value: Tank Variant
+      value: Tank
       objectReference: {fileID: 0}
     - target: {fileID: 316249170197629835, guid: 75dca2b123e6d69498bb9230d6f6d531,
         type: 3}
@@ -353,18 +353,6 @@ GameObject:
 --- !u!1 &5357900232648433329 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5133913965574556032, guid: 75dca2b123e6d69498bb9230d6f6d531,
-    type: 3}
-  m_PrefabInstance: {fileID: 964973541881747249}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7283559971764592661 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -1697820335186151644, guid: 75dca2b123e6d69498bb9230d6f6d531,
-    type: 3}
-  m_PrefabInstance: {fileID: 964973541881747249}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7489752911954660796 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -1543410011646829939, guid: 75dca2b123e6d69498bb9230d6f6d531,
     type: 3}
   m_PrefabInstance: {fileID: 964973541881747249}
   m_PrefabAsset: {fileID: 0}

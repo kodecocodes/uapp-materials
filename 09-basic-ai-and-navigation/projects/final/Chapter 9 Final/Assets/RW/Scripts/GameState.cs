@@ -91,7 +91,6 @@ public class GameState : MonoBehaviour
                 state = States.Fight;
                 timeRemaining = 1.0f;
             }
-
             UpdateGUI();
         }
 
@@ -108,7 +107,7 @@ public class GameState : MonoBehaviour
         {
             player.GetComponent<NavMeshAgent>().isStopped = false;
             // Randomly spawn 
-            if (timeRemaining < 0)
+            if (timeRemaining < 0 && spawners.Count > 0)
             {
                 int index = UnityEngine.Random.Range(0, spawners.Count);
                 int spawnCount = UnityEngine.Random.Range(3, 8);
