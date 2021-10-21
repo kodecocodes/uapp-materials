@@ -46,12 +46,25 @@ public class EnemyController : MonoBehaviour
     private float timeRemaining = 0;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         state = States.Ready;
         characterAnimator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.Find("Tank");
+        agent.enabled = false;
+    }
+
+    // Enable ensures that the agent is on the NavMesh.
+    public void Enable()
+    {
+        NavMeshHit closestHit;
+        if (NavMesh.SamplePosition(transform.position, out closestHit, 500, 1))
+        {
+            transform.position = closestHit.position;
+        }
+        gameObject.SetActive(true);
+        gameObject.GetComponent<NavMeshAgent>().enabled = true;
     }
 
     // Update is called once per frame
@@ -59,17 +72,24 @@ public class EnemyController : MonoBehaviour
     {
         if (state == States.Ready)
         {
-            // TODO: implement the AI navigation activity
+            // 1. Set the destination as the player
+
+            // TODO: complete this section following tutorial.
         }
         if (state == States.Attack)
         {
-            // TODO: how the enemy can attack the tank
+            // TODO: complete this section following tutorial.
         }
     }
 
     //Upon collision with a trigger GameObject, queue the carrot death. 
     private void OnTriggerEnter(Collider other)
     {
-        // TODO: implement a death of the carrot
+        if (state != States.Dead)
+        {
+            // trigger the character death.
+
+            // TODO: complete this section following tutorial.
+        }
     }
 }

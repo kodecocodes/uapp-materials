@@ -44,8 +44,8 @@ public class PlayerController : MonoBehaviour
     public float launchVelocity = 700f;
 
     // To rotate a turret to target an enemy
-    public GameObject turretVertical;
-    public GameObject turretHorizontal;
+    private GameObject cannonVertical;
+    private GameObject cannonHorizontal;
 
     [SerializeField]
     private int health = 1000;
@@ -55,6 +55,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        cannonVertical = transform.Find("Body/Cannon_Horizontal/Cannon_Vertical").gameObject;
+        cannonHorizontal = transform.Find("Body/Cannon_Horizontal/Cannon_Vertical").gameObject;
     }
 
     void Update() { }
@@ -76,12 +78,12 @@ public class PlayerController : MonoBehaviour
 
     public void OnMove()
     {
-        // TODO: handle point-to-move
+        // TODO: complete this section following tutorial.
     }
 
     public void OnFire()
     {
-        // TODO: handle firing the tank cannon
+        // TODO: complete this section following tutorial.
     }
 
     public void DamagePlayer()

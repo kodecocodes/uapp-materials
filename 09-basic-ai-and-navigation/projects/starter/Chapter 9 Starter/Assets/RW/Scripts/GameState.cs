@@ -79,22 +79,45 @@ public class GameState : MonoBehaviour
 
         if (player.GetComponent<PlayerController>().GetHealth() < 0)
         {
-            // TODO: what happens on a loss
+            state = States.Lose;
+            player.GetComponent<NavMeshAgent>().isStopped = true;
+            UpdateGUI();
         }
 
         if (state == States.Countdown)
         {
-            // TODO: setup the countdown
+            if (timeRemaining < 0)
+            {
+                state = States.Fight;
+                timeRemaining = 1.0f;
+            }
+            UpdateGUI();
         }
 
         if (state == States.Fight)
         {
-            // TODO: setup the GUI text
+            if (timeRemaining < 0)
+            {
+                state = States.Battle;
+                UpdateGUI();
+            }
         }
 
         if (state == States.Battle)
         {
-            // TODO: what changes on entering battle
+            player.GetComponent<NavMeshAgent>().isStopped = false;
+            // Randomly spawn 
+            if (timeRemaining < 0 && spawners.Count > 0)
+            {
+                int index = UnityEngine.Random.Range(0, spawners.Count);
+                int spawnCount = UnityEngine.Random.Range(3, 8);
+
+                GateSpawner g = spawners[index];
+                g.SpawnEnemies(spawnCount);
+
+                timeRemaining = 2;
+            }
+            UpdateGUI();
         }
     }
 

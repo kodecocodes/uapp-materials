@@ -1,20 +1,20 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &881368364
+--- !u!114 &7259644214319968674
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8087929968234622031}
+  m_GameObject: {fileID: 1330718981753740256}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dbb6396bf5f79844da1fb4499c0d8b1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Enemy: {fileID: 26244155050421202, guid: cabc34e16464caa4e878add6577bcd17, type: 3}
+  EnemyPrefab: {fileID: 26244155050421202, guid: cabc34e16464caa4e878add6577bcd17,
+    type: 3}
   Gate: {fileID: 8087929968234622031}
-  Container: {fileID: 0}
   height: 5
   offset: 0
   origin: {x: 0, y: 0, z: 0}
@@ -117,6 +117,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5b64dd7148ed36498e80f7616412546, type: 3}
+--- !u!1 &1330718981753740256 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: c5b64dd7148ed36498e80f7616412546,
+    type: 3}
+  m_PrefabInstance: {fileID: 7013869110044017385}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8087929968234622031 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7969016464879505754, guid: c5b64dd7148ed36498e80f7616412546,

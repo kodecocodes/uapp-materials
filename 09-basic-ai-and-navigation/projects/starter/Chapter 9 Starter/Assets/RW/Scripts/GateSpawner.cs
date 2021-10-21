@@ -36,21 +36,22 @@ using UnityEngine;
 
 public class GateSpawner : MonoBehaviour
 {
-    public GameObject Enemy;
+    public GameObject EnemyPrefab;
     public GameObject Gate;
-    public GameObject Container;
     public float height = 5;
     public float offset = 0;
 
     private enum State { Ready, Raising, Lowering};
     private State state;
     public Vector3 origin;
+    private GameObject Container;
 
     // Start is called before the first frame update
     void Start()
     {
         state = State.Ready;
         origin = Gate.transform.position;
+        Container = GameObject.Find("Enemies");
     }
 
     // Update is called once per frame
@@ -58,12 +59,28 @@ public class GateSpawner : MonoBehaviour
     {
         if (state == State.Raising)
         {
-            // TODO: show gate raising
+            if (offset < height)
+            {
+                offset += Time.deltaTime;
+                Gate.transform.Translate(new Vector3(0, 0, Time.deltaTime));
+            }
+            else
+            {
+                state = State.Lowering;
+            }
         }
 
         if (state == State.Lowering)
         {
-            // TODO: show gate lowering
+            if (offset > 0)
+            {
+                offset -= Time.deltaTime;
+                Gate.transform.Translate(new Vector3(0, 0, -Time.deltaTime));
+            }
+            else
+            {
+                state = State.Ready;
+            }
         }
     }
 
@@ -71,7 +88,15 @@ public class GateSpawner : MonoBehaviour
     {
         if (state == State.Ready)
         {
-            // TODO: implement spawning the enemies.
+            for (int i = 0; i < number; i++)
+            {
+                GameObject enemy = Instantiate(EnemyPrefab, Gate.transform.parent);
+                Vector3 forward = Gate.transform.forward;
+                enemy.transform.localPosition = new Vector3(0, 0, 0);
+                enemy.transform.parent = Container.transform;
+                enemy.GetComponent<EnemyController>().Enable();
+            }
+            state = State.Raising;
         }
     }
 }

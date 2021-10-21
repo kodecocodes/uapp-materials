@@ -695,7 +695,7 @@ PrefabInstance:
     - target: {fileID: 1330718981753740256, guid: 95454e9447038b5428a742bef488bae7,
         type: 3}
       propertyPath: m_Name
-      value: GateWall Variant (2)
+      value: GateWall 4
       objectReference: {fileID: 0}
     - target: {fileID: 2606722192445794803, guid: 95454e9447038b5428a742bef488bae7,
         type: 3}
@@ -1049,7 +1049,7 @@ PrefabInstance:
     - target: {fileID: 1330718981753740256, guid: 95454e9447038b5428a742bef488bae7,
         type: 3}
       propertyPath: m_Name
-      value: GateWall Variant
+      value: GateWall 1
       objectReference: {fileID: 0}
     - target: {fileID: 2606722192445794803, guid: 95454e9447038b5428a742bef488bae7,
         type: 3}
@@ -1909,7 +1909,7 @@ PrefabInstance:
     - target: {fileID: 1330718981753740256, guid: 95454e9447038b5428a742bef488bae7,
         type: 3}
       propertyPath: m_Name
-      value: GateWall Variant (1)
+      value: GateWall 3
       objectReference: {fileID: 0}
     - target: {fileID: 2606722192445794803, guid: 95454e9447038b5428a742bef488bae7,
         type: 3}
@@ -2138,7 +2138,7 @@ PrefabInstance:
     - target: {fileID: 1330718981753740256, guid: 95454e9447038b5428a742bef488bae7,
         type: 3}
       propertyPath: m_Name
-      value: GateWall Variant (3)
+      value: GateWall 2
       objectReference: {fileID: 0}
     - target: {fileID: 2606722192445794803, guid: 95454e9447038b5428a742bef488bae7,
         type: 3}
@@ -2647,36 +2647,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2034331924}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2034793287
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2034793289}
-  m_Layer: 0
-  m_Name: Game
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2034793289
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2034793287}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2035977548
 GameObject:
   m_ObjectHideFlags: 0
@@ -2805,6 +2775,16 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 560540220}
+    - target: {fileID: 2180994864680464875, guid: 751cf2b37ba76b24eb7d9a432bec3ef7,
+        type: 3}
+      propertyPath: health
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2180994864680464875, guid: 751cf2b37ba76b24eb7d9a432bec3ef7,
+        type: 3}
+      propertyPath: fullHealth
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 4112407254294349544, guid: 751cf2b37ba76b24eb7d9a432bec3ef7,
         type: 3}
       propertyPath: health
