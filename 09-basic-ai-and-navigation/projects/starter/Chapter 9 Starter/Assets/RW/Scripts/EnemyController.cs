@@ -52,7 +52,6 @@ public class EnemyController : MonoBehaviour
         characterAnimator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.Find("Tank");
-        agent.enabled = false;
     }
 
     // Enable ensures that the agent is on the NavMesh.
