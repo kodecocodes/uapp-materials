@@ -44,8 +44,8 @@ public class PlayerController : MonoBehaviour
     public float launchVelocity = 700f;
 
     // To rotate a turret to target an enemy
-    public GameObject turretVertical;
-    public GameObject turretHorizontal;
+    private GameObject cannonVertical;
+    private GameObject cannonHorizontal;
 
     [SerializeField]
     private int health = 1000;
@@ -55,6 +55,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        cannonVertical = transform.Find("Body/Cannon_Horizontal/Cannon_Vertical").gameObject;
+        cannonHorizontal = transform.Find("Body/Cannon_Horizontal/Cannon_Vertical").gameObject;
     }
 
     void Update() { }
@@ -77,12 +79,10 @@ public class PlayerController : MonoBehaviour
     public void OnMove()
     {
         RaycastHit hit;
-        Debug.Log("Try to move to a new position");
 
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue()), out hit, 100))
         {
             agent.destination = hit.point;
-            Debug.Log("Moving to a new position");
         }
     }
 
@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour
     {
         // On a mouse click, get the mouse current position as Vector2Control.
         // https://docs.unity3d.com/Packages/com.unity.inputsystem@1.0/manual/Mouse.html
-        float x =  Mouse.current.position.x.ReadValue();
+        float x = Mouse.current.position.x.ReadValue();
         float y = Mouse.current.position.y.ReadValue();
 
         Debug.Log("Fire at mouse " + x + ", " + y);
@@ -104,16 +104,16 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
         {
             Vector3 target = hit.point;
-            target.y = turretHorizontal.transform.position.y;
-            turretHorizontal.transform.LookAt(target);
+            target.y = cannonHorizontal.transform.position.y;
+            cannonHorizontal.transform.LookAt(target);
         }
 
-        Vector3 forward = turretVertical.transform.forward;
+        Vector3 forward = cannonVertical.transform.forward;
         Vector3 velocity = forward * launchVelocity;
         Vector3 velocityHand = new Vector3(velocity.z, velocity.y, velocity.x);
 
         // Where the projectile is started and directed.
-        Transform cannon = turretVertical.transform;
+        Transform cannon = cannonVertical.transform;
         GameObject fork = Instantiate(projectile, cannon.position, cannon.rotation);
         fork.GetComponent<Rigidbody>().AddForce(velocity);
     }
