@@ -30,7 +30,6 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -42,6 +41,7 @@ public class GameState : MonoBehaviour
 {
     // Assign the empty GameObject that will contain the spawned enemies.
     public GameObject Enemies;
+    public GameObject DestroyedTank;
     private GameObject player;
 
     // Allow to hook-up different spawner sites.
@@ -62,13 +62,6 @@ public class GameState : MonoBehaviour
     const int highPriority = 2;
     const int spawnTimer = 5;
 
-    // TODO: add virtual cameras here
-
-    public void ActivateCamera(CinemachineVirtualCamera camera)
-    {
-        // TODO: implement switching the CinemachineVirtualCamera
-    }
-
     // Start is called before the first frame update
     void Start()
     {
@@ -84,7 +77,6 @@ public class GameState : MonoBehaviour
         state = States.Countdown;
         timeRemaining = 3;
         UpdateGUI();
-        // TODO: set the main virtual camera
     }
 
     // Update is called once per frame
@@ -95,9 +87,8 @@ public class GameState : MonoBehaviour
         if (player.GetComponent<PlayerController>().GetHealth() < 0)
         {
             state = States.Lose;
-            UpdateGUI();
 
-            // TODO: animate the destruction of a tank.
+            // TODO
         }
 
         if (state == States.Countdown)
@@ -118,7 +109,6 @@ public class GameState : MonoBehaviour
             GateSpawner g = spawners[gate];
             g.SpawnEnemies(5);
 
-            // TODO: switch to a virtual camera to show the enemies
             if (timeRemaining < 0)
             {
                 state = States.Battle;
