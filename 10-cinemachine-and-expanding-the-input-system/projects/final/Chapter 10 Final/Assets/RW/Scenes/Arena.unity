@@ -1057,8 +1057,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 560540218}
-  m_LocalRotation: {x: 0.4498127, y: -0.20374204, z: 0.106186315, w: 0.8630656}
-  m_LocalPosition: {x: -5.250001, y: 6.4, z: -1.51}
+  m_LocalRotation: {x: -0.02366766, y: 0.9228327, z: -0.3801562, w: -0.057453465}
+  m_LocalPosition: {x: 1, y: 8, z: -27}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1083,7 +1083,7 @@ MonoBehaviour:
   m_UpdateMethod: 2
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
-    m_Style: 1
+    m_Style: 0
     m_Time: 0.5
     m_CustomCurve:
       serializedVersion: 2
@@ -1118,7 +1118,7 @@ PrefabInstance:
     - target: {fileID: 1330718981753740256, guid: 95454e9447038b5428a742bef488bae7,
         type: 3}
       propertyPath: m_Name
-      value: GateWall Variant (2)
+      value: GateWall 4
       objectReference: {fileID: 0}
     - target: {fileID: 2606722192445794803, guid: 95454e9447038b5428a742bef488bae7,
         type: 3}
@@ -1611,7 +1611,7 @@ PrefabInstance:
     - target: {fileID: 1330718981753740256, guid: 95454e9447038b5428a742bef488bae7,
         type: 3}
       propertyPath: m_Name
-      value: GateWall Variant
+      value: GateWall 1
       objectReference: {fileID: 0}
     - target: {fileID: 2606722192445794803, guid: 95454e9447038b5428a742bef488bae7,
         type: 3}
@@ -2922,7 +2922,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1613256645}
-  m_LocalRotation: {x: -0.023667673, y: 0.9228327, z: -0.3801562, w: -0.0574535}
+  m_LocalRotation: {x: -0.02366766, y: 0.9228327, z: -0.3801562, w: -0.057453465}
   m_LocalPosition: {x: 7.6287055, y: 0.30986786, z: -31.66716}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2946,7 +2946,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 1
+  m_Priority: 20
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 47415225}
   m_Follow: {fileID: 47415225}
@@ -3148,7 +3148,7 @@ PrefabInstance:
     - target: {fileID: 1330718981753740256, guid: 95454e9447038b5428a742bef488bae7,
         type: 3}
       propertyPath: m_Name
-      value: GateWall Variant (1)
+      value: GateWall 3
       objectReference: {fileID: 0}
     - target: {fileID: 2606722192445794803, guid: 95454e9447038b5428a742bef488bae7,
         type: 3}
@@ -3389,7 +3389,7 @@ PrefabInstance:
     - target: {fileID: 1330718981753740256, guid: 95454e9447038b5428a742bef488bae7,
         type: 3}
       propertyPath: m_Name
-      value: GateWall Variant (3)
+      value: GateWall 2
       objectReference: {fileID: 0}
     - target: {fileID: 2606722192445794803, guid: 95454e9447038b5428a742bef488bae7,
         type: 3}
