@@ -8,7 +8,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/RW/Scenes/DiningHall.unity
     guid: d61973f21f8525a43842e140c9f9df93
-  - enabled: 1
-    path: Assets/RW/Scenes/Game End.unity
-    guid: c75f04380c836534eacca113a032d336
   m_configObjects: {}
