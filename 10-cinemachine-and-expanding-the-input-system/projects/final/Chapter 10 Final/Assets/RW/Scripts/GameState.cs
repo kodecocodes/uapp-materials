@@ -108,8 +108,7 @@ public class GameState : MonoBehaviour
         {
             state = States.Lose;
 
-            //hide the GameObject and replace with the DestroyedTank.
-            //player.GetComponent<NavMeshAgent>().isStopped = true;
+            // Hide the player.
             player.SetActive(false);
             ActivateCamera(zoomCamera);
             UpdateGUI();
