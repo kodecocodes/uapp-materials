@@ -41,12 +41,10 @@ public class PlayerAvatar : MonoBehaviour
     private CharacterController characterController;
     private Vector2 movementInput = Vector2.zero;
     private bool allowInput = true;
-    private InteractionSystem interactionSystem;
 
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
-        interactionSystem = GetComponent<InteractionSystem>();
     }
 
     private void Update()
@@ -85,28 +83,5 @@ public class PlayerAvatar : MonoBehaviour
         }
 
         movementInput = context.ReadValue<Vector2>();
-    }
-
-    public void Interact(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            if (!allowInput)
-            {
-                return;
-            }
-
-            interactionSystem.AttemptInteraction();
-        }
-    }
-
-    public void DisableInput()
-    {
-        allowInput = false;
-    }
-
-    public void EnableInput()
-    {
-        allowInput = true;
     }
 }

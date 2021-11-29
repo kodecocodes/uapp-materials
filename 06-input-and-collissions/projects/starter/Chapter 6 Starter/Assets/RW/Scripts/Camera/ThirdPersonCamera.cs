@@ -30,20 +30,13 @@
 
 using UnityEngine;
 
-public class PlayAnimationOnInteraction : InteractableObject
+public class ThirdPersonCamera : MonoBehaviour
 {
-    public Animator animator;
-    public string animationTriggerName;
-    public AudioClip soundEffect;
+    public Transform transformToFollow;
+    public Vector3 positionOffset;
 
-    public override void Interact(PlayerAvatar playerAvatar)
+    private void LateUpdate()
     {
-        canBeInteractedWith = false;
-        animator.SetTrigger(animationTriggerName);
-
-        if (soundEffect != null)
-        {
-            AudioSource.PlayClipAtPoint(soundEffect, Camera.main.transform.position);
-        }
+        transform.position = transformToFollow.position + positionOffset;
     }
 }

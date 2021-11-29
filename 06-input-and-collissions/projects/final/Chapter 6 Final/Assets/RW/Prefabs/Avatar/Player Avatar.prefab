@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 820878678659120308}
   - component: {fileID: 820878678659120310}
   - component: {fileID: 820878678659120313}
-  - component: {fileID: 820878678659120312}
   m_Layer: 0
   m_Name: Player Avatar
   m_TagString: Untagged
@@ -171,24 +170,6 @@ MonoBehaviour:
   rotationSpeed: 10
   gravity: 15
   animator: {fileID: 883488954380797350}
---- !u!114 &820878678659120312
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 820878678659120309}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e85d94f08781edc40b76b9b102586e77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactionMask:
-    serializedVersion: 2
-    m_Bits: 64
-  interactionSphereForwardPosition: 1.6
-  interactionSphereOffset: {x: 0, y: 1, z: 0}
-  interactionSphereSize: 1
 --- !u!1001 &820878679501027332
 PrefabInstance:
   m_ObjectHideFlags: 0
