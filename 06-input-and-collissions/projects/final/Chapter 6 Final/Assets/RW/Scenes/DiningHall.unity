@@ -79065,9 +79065,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 820878678659120308, guid: 70226e2afcafd9849a0e9adae73b5fc7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 820878678659120309, guid: 70226e2afcafd9849a0e9adae73b5fc7, type: 3}
       propertyPath: m_Name
       value: Player Avatar
+      objectReference: {fileID: 0}
+    - target: {fileID: 820878678659120310, guid: 70226e2afcafd9849a0e9adae73b5fc7, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 820878678659120311, guid: 70226e2afcafd9849a0e9adae73b5fc7, type: 3}
       propertyPath: m_RootOrder
@@ -79117,8 +79125,12 @@ PrefabInstance:
       propertyPath: c
       value: 308
       objectReference: {fileID: 0}
+    - target: {fileID: 7145004333983952808, guid: 70226e2afcafd9849a0e9adae73b5fc7, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 820878678659120312, guid: 70226e2afcafd9849a0e9adae73b5fc7, type: 3}
+    - {fileID: 7145004333983952808, guid: 70226e2afcafd9849a0e9adae73b5fc7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 70226e2afcafd9849a0e9adae73b5fc7, type: 3}
 --- !u!1001 &1392082244690477758
 PrefabInstance:
