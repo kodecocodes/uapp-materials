@@ -968,18 +968,6 @@ Transform:
   m_Father: {fileID: 972560690}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &535224393 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 881368364, guid: 95454e9447038b5428a742bef488bae7,
-    type: 3}
-  m_PrefabInstance: {fileID: 1883051581}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbb6396bf5f79844da1fb4499c0d8b1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &560540218
 GameObject:
   m_ObjectHideFlags: 0
@@ -1124,6 +1112,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GateWall Variant (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1797933470708838868, guid: 95454e9447038b5428a742bef488bae7,
+        type: 3}
+      propertyPath: Container
+      value: 
+      objectReference: {fileID: 303495311}
     - target: {fileID: 2606722192445794803, guid: 95454e9447038b5428a742bef488bae7,
         type: 3}
       propertyPath: m_RootOrder
@@ -1388,9 +1381,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &791515749 stripped
+--- !u!114 &838696823 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 881368364, guid: 95454e9447038b5428a742bef488bae7,
+  m_CorrespondingSourceObject: {fileID: 1797933470708838868, guid: 95454e9447038b5428a742bef488bae7,
     type: 3}
   m_PrefabInstance: {fileID: 1677337698}
   m_PrefabAsset: {fileID: 0}
@@ -1531,18 +1524,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 964973540560357917}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &920399402 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 881368364, guid: 95454e9447038b5428a742bef488bae7,
-    type: 3}
-  m_PrefabInstance: {fileID: 1091236936}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbb6396bf5f79844da1fb4499c0d8b1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &972560689
 GameObject:
   m_ObjectHideFlags: 0
@@ -1639,6 +1620,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GateWall Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 1797933470708838868, guid: 95454e9447038b5428a742bef488bae7,
+        type: 3}
+      propertyPath: Container
+      value: 
+      objectReference: {fileID: 303495311}
     - target: {fileID: 2606722192445794803, guid: 95454e9447038b5428a742bef488bae7,
         type: 3}
       propertyPath: m_RootOrder
@@ -2714,7 +2700,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1575191523}
-  m_LocalRotation: {x: 0.3801562, y: 0.05745347, z: -0.023667663, w: 0.9228327}
+  m_LocalRotation: {x: 0.3801562, y: 0.057453502, z: -0.023667676, w: 0.9228327}
   m_LocalPosition: {x: 5.6287055, y: 0.30986786, z: 27.33284}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2950,7 +2936,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1613256645}
-  m_LocalRotation: {x: -0.023667673, y: 0.9228327, z: -0.3801562, w: -0.0574535}
+  m_LocalRotation: {x: -0.02366768, y: 0.9228327, z: -0.3801562, w: -0.057453513}
   m_LocalPosition: {x: 7.6287055, y: 0.30986786, z: -31.66716}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3162,6 +3148,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1655650357 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1797933470708838868, guid: 95454e9447038b5428a742bef488bae7,
+    type: 3}
+  m_PrefabInstance: {fileID: 670167086}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbb6396bf5f79844da1fb4499c0d8b1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1662345862 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1797933470708838868, guid: 95454e9447038b5428a742bef488bae7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1883051581}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbb6396bf5f79844da1fb4499c0d8b1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1677337698
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3182,6 +3192,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GateWall Variant (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1797933470708838868, guid: 95454e9447038b5428a742bef488bae7,
+        type: 3}
+      propertyPath: Container
+      value: 
+      objectReference: {fileID: 303495311}
     - target: {fileID: 2606722192445794803, guid: 95454e9447038b5428a742bef488bae7,
         type: 3}
       propertyPath: m_RootOrder
@@ -3415,6 +3430,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GateWall Variant (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1797933470708838868, guid: 95454e9447038b5428a742bef488bae7,
+        type: 3}
+      propertyPath: Container
+      value: 
+      objectReference: {fileID: 303495311}
     - target: {fileID: 2606722192445794803, guid: 95454e9447038b5428a742bef488bae7,
         type: 3}
       propertyPath: m_RootOrder
@@ -3547,18 +3567,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1894278480}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1917368442 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 881368364, guid: 95454e9447038b5428a742bef488bae7,
-    type: 3}
-  m_PrefabInstance: {fileID: 670167086}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbb6396bf5f79844da1fb4499c0d8b1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1936640907
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3966,10 +3974,10 @@ MonoBehaviour:
   Enemies: {fileID: 303495311}
   DestroyedTank: {fileID: 90181044}
   spawners:
-  - {fileID: 920399402}
-  - {fileID: 535224393}
-  - {fileID: 791515749}
-  - {fileID: 1917368442}
+  - {fileID: 2055963898}
+  - {fileID: 1662345862}
+  - {fileID: 838696823}
+  - {fileID: 1655650357}
   MessageBar: {fileID: 1181638979}
   HealthBar: {fileID: 1589889483}
   zoomCamera: {fileID: 1237745065}
@@ -4033,6 +4041,18 @@ Transform:
   m_Father: {fileID: 972560690}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &2055963898 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1797933470708838868, guid: 95454e9447038b5428a742bef488bae7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1091236936}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbb6396bf5f79844da1fb4499c0d8b1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2126494375
 GameObject:
   m_ObjectHideFlags: 0
