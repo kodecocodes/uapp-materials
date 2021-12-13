@@ -32,7 +32,7 @@ using UnityEngine;
 
 public class IngredientObject : MonoBehaviour
 {
-    public enum IngredientType { Carrot, Pepper, Potato, Pea }
+    public enum IngredientType { Carrot, Pepper, Potato, Pea, Zucchini }
     public enum IngredientState { Raw, Clean, Chopped }
 
     public IngredientType type;

@@ -123,6 +123,63 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &11449035
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1731815914}
+    m_Modifications:
+    - target: {fileID: 6738245542079308677, guid: 97cd6c23234759440ae7e958444b9ebf, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6738245542079308677, guid: 97cd6c23234759440ae7e958444b9ebf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6738245542079308677, guid: 97cd6c23234759440ae7e958444b9ebf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6738245542079308677, guid: 97cd6c23234759440ae7e958444b9ebf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6738245542079308677, guid: 97cd6c23234759440ae7e958444b9ebf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6738245542079308677, guid: 97cd6c23234759440ae7e958444b9ebf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.000000021855694
+      objectReference: {fileID: 0}
+    - target: {fileID: 6738245542079308677, guid: 97cd6c23234759440ae7e958444b9ebf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6738245542079308677, guid: 97cd6c23234759440ae7e958444b9ebf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6738245542079308677, guid: 97cd6c23234759440ae7e958444b9ebf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6738245542079308677, guid: 97cd6c23234759440ae7e958444b9ebf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6738245542079308677, guid: 97cd6c23234759440ae7e958444b9ebf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771057116385235350, guid: 97cd6c23234759440ae7e958444b9ebf, type: 3}
+      propertyPath: m_Name
+      value: Ingredient_Zucchini
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 97cd6c23234759440ae7e958444b9ebf, type: 3}
 --- !u!1 &17977243
 GameObject:
   m_ObjectHideFlags: 0
@@ -3354,11 +3411,13 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Move Input
       m_Flags: 0
+    m_Flags: 0
   pickUpZones:
   - {fileID: 1956698946}
   - {fileID: 920658504}
   - {fileID: 1161656881}
   - {fileID: 232519210}
+  - {fileID: 1731815916}
   choppingBoard: {fileID: 1248017862}
   knife: {fileID: 5709016527764819384}
   sink: {fileID: 200703422}
@@ -22194,6 +22253,7 @@ GameObject:
   - component: {fileID: 1330775475}
   - component: {fileID: 1330775476}
   - component: {fileID: 1330775477}
+  - component: {fileID: 1330775478}
   m_Layer: 0
   m_Name: RecipeBook
   m_TagString: Untagged
@@ -22229,6 +22289,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recipes:
   - {fileID: 11400000, guid: 014aaa6fa6832dd4db039ccb2ac7e446, type: 2}
+  - {fileID: 11400000, guid: 31da6f78c9cb7a649a796e0b7864053f, type: 2}
   OnOrderCreated:
     m_PersistentCalls:
       m_Calls:
@@ -22296,6 +22357,34 @@ MonoBehaviour:
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 11400000, guid: 014aaa6fa6832dd4db039ccb2ac7e446, type: 2}
+          m_ObjectArgumentAssemblyTypeName: Recipe, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1330775478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1330775474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c977ec42d4ef954d9e0140045e09412, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serveEvent: {fileID: 11400000, guid: 659ca7cb7a3dda34aaeac9d5edcaa81a, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1330775476}
+        m_TargetAssemblyTypeName: OrderBook, Assembly-CSharp
+        m_MethodName: Service
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 31da6f78c9cb7a649a796e0b7864053f, type: 2}
           m_ObjectArgumentAssemblyTypeName: Recipe, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -34679,7 +34768,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8620801931988470349, guid: 1f8962bd4eee9f14a9a64c6cd8e15c31, type: 3}
       propertyPath: m_Name
-      value: Barrel (3)
+      value: Barrel (Zucchini)
       objectReference: {fileID: 0}
     - target: {fileID: 8620801931988470349, guid: 1f8962bd4eee9f14a9a64c6cd8e15c31, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -34692,6 +34781,29 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4753659865945765982, guid: 1f8962bd4eee9f14a9a64c6cd8e15c31, type: 3}
   m_PrefabInstance: {fileID: 1731815912}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1731815914 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3610563817968071344, guid: 1f8962bd4eee9f14a9a64c6cd8e15c31, type: 3}
+  m_PrefabInstance: {fileID: 1731815912}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1731815915 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8620801931988470349, guid: 1f8962bd4eee9f14a9a64c6cd8e15c31, type: 3}
+  m_PrefabInstance: {fileID: 1731815912}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1731815916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1731815915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff6981c3c12af2b40a08d96582164ca5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientPrefab: {fileID: 4158186002753621914, guid: 0851220fd6325854a8eb08917ddd8dd4, type: 3}
 --- !u!1 &1732021734
 GameObject:
   m_ObjectHideFlags: 0
@@ -35128,6 +35240,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MoveRepeatDelay: 0.5
   m_MoveRepeatRate: 0.1
+  m_XRTrackingOrigin: {fileID: 0}
   m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
   m_PointAction: {fileID: 1054132383583890850, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
   m_MoveAction: {fileID: 3710738434707379630, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}

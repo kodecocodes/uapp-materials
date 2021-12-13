@@ -107,7 +107,8 @@ public class OrderBook : MonoBehaviour
 
     public void CreateOrder()
     {
-        Recipe newOrder = recipes[0];
+        int index = UnityEngine.Random.Range(0, recipes.Count);
+        Recipe newOrder = recipes[index];
         orders.Add(newOrder);
         OnOrderCreated?.Invoke(newOrder);
     }
