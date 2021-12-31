@@ -33,7 +33,6 @@ using UnityEngine;
 public class DialogueStarter : InteractableObject
 {
     public Conversation conversation;
-    public bool allowRepeatedConversation = true;
     public bool turnToPlayer;
 
     private Quaternion originalRotation;
@@ -41,6 +40,7 @@ public class DialogueStarter : InteractableObject
     private void Awake()
     {
         originalRotation = transform.rotation;
+        gameObject.layer = LayerMask.NameToLayer("Interaction");
     }
 
     public override void Interact(PlayerAvatar playerAvatar)
@@ -62,11 +62,7 @@ public class DialogueStarter : InteractableObject
 
     public void OnConversationEnd()
     {
-        if (allowRepeatedConversation)
-        {
-            canBeInteractedWith = true;
-        }
-
+        canBeInteractedWith = true;
         transform.rotation = originalRotation;
     }
 }

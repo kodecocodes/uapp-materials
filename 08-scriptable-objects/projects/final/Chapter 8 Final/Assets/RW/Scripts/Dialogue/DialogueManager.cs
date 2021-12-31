@@ -32,6 +32,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -102,22 +103,22 @@ public class DialogueManager : MonoBehaviour
 
         if (!currentLine.thisIsAQuestion)
         {
-            SwitchToNormalText();
+            ShowTextUI();
         }
         else
         {
-            SwitchToQuestion(currentLine);
+            ShowQuestionUI(currentLine);
         }
     }
 
-    private void SwitchToNormalText()
+    private void ShowTextUI()
     {
         answersParent.SetActive(false);
         optionSelector.gameObject.SetActive(false);
         continueIndicator.SetActive(true);
     }
 
-    private void SwitchToQuestion(DialogueLine currentLine)
+    private void ShowQuestionUI(DialogueLine currentLine)
     {
         answersParent.SetActive(true);
         continueIndicator.SetActive(false);
@@ -125,7 +126,7 @@ public class DialogueManager : MonoBehaviour
         firstOption.text = currentLine.dialogueQuestion.firstOption;
         secondOption.text = currentLine.dialogueQuestion.secondOption;
         firstOptionSelected = true;
-        UpdateOptionSelectorPostion();
+        StartCoroutine(UpdateOptionSelectorPostion());
     }
 
     private void SetDialogueWindowVisibility(bool visible)
@@ -162,14 +163,7 @@ public class DialogueManager : MonoBehaviour
         }
         else
         {
-            if (currentLine.exitGameAfterConversation)
-            {
-                SceneManager.LoadScene("Title");
-            }
-            else
-            {
-                EndConversation();
-            }
+            EndConversation();
         }
     }
 
@@ -196,13 +190,15 @@ public class DialogueManager : MonoBehaviour
             if (currentLine.thisIsAQuestion)
             {
                 firstOptionSelected = !firstOptionSelected;
-                UpdateOptionSelectorPostion();
+                StartCoroutine(UpdateOptionSelectorPostion());
             }
         }
     }
 
-    private void UpdateOptionSelectorPostion()
+    private IEnumerator UpdateOptionSelectorPostion()
     {
+        yield return new WaitForEndOfFrame();
+
         if (firstOptionSelected)
         {
             optionSelector.position = new Vector3(optionSelector.position.x, firstOption.GetComponent<RectTransform>().position.y, optionSelector.position.z);

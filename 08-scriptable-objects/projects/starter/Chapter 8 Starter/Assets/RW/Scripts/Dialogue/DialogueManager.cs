@@ -31,6 +31,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class DialogueManager : MonoBehaviour
 {

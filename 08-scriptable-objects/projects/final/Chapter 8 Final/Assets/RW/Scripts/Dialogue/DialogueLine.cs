@@ -41,6 +41,4 @@ public class DialogueLine
 
     public bool thisIsAQuestion;
     public DialogueQuestion dialogueQuestion;
-
-    public bool exitGameAfterConversation;
 }
