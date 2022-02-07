@@ -63,20 +63,17 @@ public class GameState : MonoBehaviour
     const int highPriority = 2;
     const int spawnTimer = 5;
 
-    // Zoom camera
+    // 1. Cameras
     public CinemachineVirtualCamera zoomCamera;
-    public CinemachineVirtualCamera gameCamera;
+    public CinemachineVirtualCamera playerCamera;
+    public CinemachineVirtualCamera gateCamera;
 
-    // Gate Cameras, same order as GateSpawners
-    public List<CinemachineVirtualCamera> gateCameras;
-
+    // 2. Activate Camera method
     public void ActivateCamera(CinemachineVirtualCamera camera)
     {
         zoomCamera.Priority = lowPriority;
-        gameCamera.Priority = lowPriority;
-        foreach (CinemachineVirtualCamera c in gateCameras) {
-            c.Priority = lowPriority;
-        }
+        playerCamera.Priority = lowPriority;
+        gateCamera.Priority = lowPriority;
         camera.Priority = highPriority;
         camera.MoveToTopOfPrioritySubqueue();
     }
@@ -136,11 +133,11 @@ public class GameState : MonoBehaviour
             int gate = 0;
             GateSpawner g = spawners[gate];
             g.SpawnEnemies(5);
-            ActivateCamera(gateCameras[gate]);
+            ActivateCamera(gateCamera);
 
             if (timeRemaining < 0)
             {
-                ActivateCamera(gameCamera);
+                ActivateCamera(playerCamera);
                 state = States.Battle;
                 UpdateGUI();
             }
