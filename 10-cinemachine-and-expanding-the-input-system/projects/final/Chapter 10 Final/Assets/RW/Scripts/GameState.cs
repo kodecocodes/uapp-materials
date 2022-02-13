@@ -137,7 +137,6 @@ public class GameState : MonoBehaviour
 
             if (timeRemaining < 0)
             {
-                ActivateCamera(playerCamera);
                 state = States.Battle;
                 UpdateGUI();
             }
@@ -145,6 +144,7 @@ public class GameState : MonoBehaviour
 
         if (state == States.Battle)
         {
+            ActivateCamera(playerCamera);
             player.GetComponent<NavMeshAgent>().isStopped = false;
             // Randomly spawn 
             if (timeRemaining < 0)
