@@ -36,10 +36,8 @@ using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
 {
-    // DesiredPoolSize
     public int PoolSize;
 
-    // Prefabs
     public GameObject[] Prefabs;
 
     [SerializeField]
