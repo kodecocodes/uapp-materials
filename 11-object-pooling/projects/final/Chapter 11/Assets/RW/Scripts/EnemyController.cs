@@ -124,20 +124,11 @@ public class EnemyController : MonoBehaviour, IPoolable
     {    
         // Death should return object to the pool.
         yield return new WaitForSeconds(5);
+        // Destroy(gameObject);
         if (EnemyPool)
         {
             EnemyPool.Return(gameObject);
         }
-    }
-
-    public void SetPool(ObjectPool pool)
-    {
-        EnemyPool = pool;
-    }
-
-    public ObjectPool GetPool()
-    {
-        return EnemyPool;
     }
 
     public void Reset()
@@ -153,5 +144,10 @@ public class EnemyController : MonoBehaviour, IPoolable
         agent.isStopped = true;
         gameObject.SetActive(false);
         gameObject.GetComponent<NavMeshAgent>().enabled = false;
+    }
+
+    public void SetPool(ObjectPool pool)
+    {
+        EnemyPool = pool;
     }
 }

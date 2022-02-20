@@ -45,67 +45,62 @@ public class ObjectPool : MonoBehaviour
     [SerializeField]
     private Queue<GameObject> pool = new Queue<GameObject>();
 
-    public void Awake()
-    {
-        // Automatically instantiate the pool from Prefabs.
-        int j = 0;
-        for (int i = 1; i <= PoolSize; i++)
-        {
-            int index = j++;
-            GameObject poolMember = Instantiate(Prefabs[index], transform);
-            poolMember.SetActive(false);
-            IPoolable[] poolableList = poolMember.GetComponents<IPoolable>();
-            foreach (IPoolable poolable in poolableList)
-            {
-                poolable.SetPool(this);
-            }
-            pool.Enqueue(poolMember);
-            if (j == Prefabs.Length)
-            {
-                j = 0;
-            }
-        }
-    }
-
     // Add another GameObject to the managed pool.
     public void Add(GameObject anObject)
     {
-        IPoolable[] poolableList = anObject.GetComponents<IPoolable>();
-        foreach (IPoolable poolable in poolableList)
+        // 1.
+        IPoolable poolable = anObject.GetComponent<IPoolable>();
+        if (poolable != null)
         {
+            // 2.
+            pool.Enqueue(anObject);
             poolable.SetPool(this);
         }
-        pool.Enqueue(anObject);
     }
 
     // Fetch an object from the managed pool.
     public GameObject Get()
     {
+        // 1. 
         if (pool.Count > 0)
         {
+            // 2.
             GameObject toReturn = pool.Dequeue();
             toReturn.GetComponent<IPoolable>().Reset();
             return toReturn;
         }
+        // 3.
         return null;
     }
 
     public void Return(GameObject anObject)
     {
-        // Return an object back to the pool.
-        IPoolable[] poolableList = anObject.GetComponents<IPoolable>();
-        foreach (IPoolable poolable in poolableList) { 
+        // 1.
+        IPoolable poolable = anObject.GetComponent<IPoolable>();
+        if (poolable != null)
+        {
+            // 2.
             poolable.Deactivate();
+            Add(anObject);
         }
-        pool.Enqueue(anObject);
     }
 
-    public void Dispose()
+    public void Awake()
     {
-        // Should destroy all the objects in the pool.
-        while (pool.Count > 0)
+        // 1. 
+        int prefabIndex = 0;
+        for (int i = 1; i <= PoolSize; i++)
         {
-            Destroy(pool.Dequeue());
+            // 2.
+            GameObject poolMember = Instantiate(Prefabs[prefabIndex], transform);
+            // 3.
+            poolMember.SetActive(false);
+            Add(poolMember);
+            // 4.
+            if (++prefabIndex == Prefabs.Length)
+            {
+                prefabIndex = 0;
+            }
         }
     }
 }

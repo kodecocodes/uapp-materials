@@ -1,10 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class ProjectileBehaviour : MonoBehaviour, IPoolable
 {
     ObjectPool ProjectilePool;
+
+    public async void DieAsync()
+    {
+        // 1. 
+        await Task.Delay(2000);
+        // 2. 
+        // Destroy(gameObject);
+        // 3.
+        if (ProjectilePool)
+        {
+            ProjectilePool.Return(gameObject);
+        }
+    }
 
     public IEnumerator ExpireCoroutine()
     {
@@ -16,28 +30,23 @@ public class ProjectileBehaviour : MonoBehaviour, IPoolable
         }
     }
 
-    public void SetPool(ObjectPool pool)
-    {
-        ProjectilePool = pool;
-    }
-
-    public ObjectPool GetPool()
-    {
-        return ProjectilePool;
-    }
-
     public void Reset()
     {
-        // Reset needs to reactivate and clear the velocity of the particle.
+        // 1.
         gameObject.SetActive(true);
         gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-        // Restart a counter to return back to the pool.
+        // 2.
         StartCoroutine(ExpireCoroutine());
     }
 
     public void Deactivate()
     {
-        // Deactivate the gameObject when returning to a pool.
+        // 1.
         gameObject.SetActive(false);
+    }
+
+    public void SetPool(ObjectPool pool)
+    {
+        ProjectilePool = pool;
     }
 }
