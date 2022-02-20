@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
     NavMeshAgent agent;
     // A prefab to instantiate.
     public GameObject Projectile;
-    // public ObjectPool ProjectilePool;
+
     public float launchVelocity = 700f;
 
     // To rotate a turret to target an enemy
@@ -79,7 +79,6 @@ public class PlayerController : MonoBehaviour
     public void OnMove()
     {
         RaycastHit hit;
-        //Debug.Log("Try to move to a new position");
 
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue()), out hit, 100))
         {
@@ -94,8 +93,6 @@ public class PlayerController : MonoBehaviour
         // https://docs.unity3d.com/Packages/com.unity.inputsystem@1.0/manual/Mouse.html
         float x =  Mouse.current.position.x.ReadValue();
         float y = Mouse.current.position.y.ReadValue();
-
-        //Debug.Log("Fire at mouse " + x + ", " + y);
 
         // Next, ray trace to find where on the map the player clicked.
         // https://docs.unity3d.com/ScriptReference/Camera.ScreenToWorldPoint.html
@@ -118,13 +115,13 @@ public class PlayerController : MonoBehaviour
         Transform cannon = turretVertical.transform;
 
         GameObject projectile = GameObject.Instantiate(Projectile);
-        // TODO: Get a projectile from the pool.
-        // GameObject projectile = ProjectilePool.Get();
+
         if (projectile)
         {
             projectile.transform.position = cannon.position;
             projectile.transform.rotation = cannon.rotation;
             projectile.GetComponent<Rigidbody>().AddForce(velocity);
+            // TODO: add line here
         }
     }
 

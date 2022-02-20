@@ -36,7 +36,6 @@ using UnityEngine;
 
 public class GateSpawner : MonoBehaviour
 {
-    // TODO: Replace the Prefab with the EnemyPool.
     public GameObject Enemy;
 
     public GameObject Gate;
@@ -89,7 +88,6 @@ public class GateSpawner : MonoBehaviour
         {
             for (int i = 0; i < number; i++)
             {
-                // TODO: update this to avoid instantiating enemies.
                 GameObject enemy = Instantiate(Enemy, Gate.transform.parent);
                 if (enemy != null)
                 {

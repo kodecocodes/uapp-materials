@@ -36,76 +36,34 @@ using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
 {
-    // DesiredPoolSize
     public int PoolSize;
 
-    // Prefabs
     public GameObject[] Prefabs;
 
     [SerializeField]
     private Queue<GameObject> pool = new Queue<GameObject>();
 
-    public void Awake()
-    {
-        // Automatically instantiate the pool from Prefabs.
-        int j = 0;
-        for (int i = 1; i <= PoolSize; i++)
-        {
-            int index = j++;
-            GameObject poolMember = Instantiate(Prefabs[index], transform);
-            poolMember.SetActive(false);
-            IPoolable[] poolableList = poolMember.GetComponents<IPoolable>();
-            foreach (IPoolable poolable in poolableList)
-            {
-                poolable.SetPool(this);
-            }
-            pool.Enqueue(poolMember);
-            if (j == Prefabs.Length)
-            {
-                j = 0;
-            }
-        }
-    }
-
     // Add another GameObject to the managed pool.
     public void Add(GameObject anObject)
     {
-        IPoolable[] poolableList = anObject.GetComponents<IPoolable>();
-        foreach (IPoolable poolable in poolableList)
-        {
-            poolable.SetPool(this);
-        }
-        pool.Enqueue(anObject);
+        // TODO: fill in
     }
 
     // Fetch an object from the managed pool.
     public GameObject Get()
     {
-        if (pool.Count > 0)
-        {
-            GameObject toReturn = pool.Dequeue();
-            toReturn.GetComponent<IPoolable>().Reset();
-            return toReturn;
-        }
+        // TODO: fill in
         return null;
     }
 
     public void Return(GameObject anObject)
     {
-        // Return an object back to the pool.
-        IPoolable[] poolableList = anObject.GetComponents<IPoolable>();
-        foreach (IPoolable poolable in poolableList) { 
-            poolable.Deactivate();
-        }
-        pool.Enqueue(anObject);
+        // TODO: fill in
     }
 
-    public void Dispose()
+
+    public void Awake()
     {
-        // Should destroy all the objects in the pool.
-        while (pool.Count > 0)
-        {
-            Destroy(pool.Dequeue());
-        }
+        // TODO: fill in
     }
 }

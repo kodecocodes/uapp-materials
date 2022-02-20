@@ -116,24 +116,13 @@ public class EnemyController : MonoBehaviour, IPoolable
             {
                 agent.isStopped = true;
             }
-            StartCoroutine(DieCoroutine()); 
+            // TODO: add line here
         }
-    }
-
-    IEnumerator DieCoroutine()
-    {
-        // TODO: Death should return object to the pool after 5 seconds.
-        yield return new WaitForSeconds(5);
     }
 
     public void SetPool(ObjectPool pool)
     {
         EnemyPool = pool;
-    }
-
-    public ObjectPool GetPool()
-    {
-        return EnemyPool;
     }
 
     public void Reset()
