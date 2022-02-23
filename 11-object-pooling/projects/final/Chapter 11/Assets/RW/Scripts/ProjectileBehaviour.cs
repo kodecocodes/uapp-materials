@@ -9,21 +9,11 @@ public class ProjectileBehaviour : MonoBehaviour, IPoolable
 
     public async void DieAsync()
     {
-        // 1. 
+        // 1.
         await Task.Delay(2000);
-        // 2. 
+        // 2.
         // Destroy(gameObject);
         // 3.
-        if (ProjectilePool)
-        {
-            ProjectilePool.Return(gameObject);
-        }
-    }
-
-    public IEnumerator ExpireCoroutine()
-    {
-        // This coroutine provides an automatic delay to return to the pool.
-        yield return new WaitForSeconds(2);
         if (ProjectilePool)
         {
             ProjectilePool.Return(gameObject);
@@ -36,7 +26,7 @@ public class ProjectileBehaviour : MonoBehaviour, IPoolable
         gameObject.SetActive(true);
         gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
         // 2.
-        StartCoroutine(ExpireCoroutine());
+        DieAsync();
     }
 
     public void Deactivate()

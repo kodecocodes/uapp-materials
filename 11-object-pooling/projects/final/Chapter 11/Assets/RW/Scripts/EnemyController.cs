@@ -1,15 +1,15 @@
 /// Copyright (c) 2021 Razeware LLC
-/// 
+///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
 /// in the Software without restriction, including without limitation the rights
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
+///
 /// Notwithstanding the foregoing, you may not use, copy, modify, merge, publish,
 /// distribute, sublicense, create a derivative work, and/or sell copies of the
 /// Software in any work that is designed, intended, or marketed for pedagogical or
@@ -17,7 +17,7 @@
 /// or information technology.  Permission for such use, copying, modification,
 /// merger, publication, distribution, sublicensing, creation of derivative works,
 /// or sale is expressly withheld.
-/// 
+///
 /// This project and source code may use libraries or frameworks that are
 /// released under various Open-Source licenses. Use of those libraries and
 /// frameworks are governed by their own individual licenses.
@@ -74,7 +74,7 @@ public class EnemyController : MonoBehaviour, IPoolable
             agent.SetDestination(player.transform.position);
             characterAnimator.SetFloat("Speed", agent.velocity.magnitude);
 
-                
+
             if (agent.remainingDistance < 5.0f)
             {
                 agent.isStopped = true;
@@ -82,7 +82,7 @@ public class EnemyController : MonoBehaviour, IPoolable
 
                 state = States.Attack;
                 timeRemaining = 1f;
-             
+
             } else
             {
                 agent.isStopped = false;
@@ -103,7 +103,7 @@ public class EnemyController : MonoBehaviour, IPoolable
         }
     }
 
-    //Upon collision with a trigger GameObject, queue the carrot death. 
+    //Upon collision with a trigger GameObject, queue the carrot death.
     private void OnTriggerEnter(Collider other)
     {
         if (state != States.Dead)
@@ -116,12 +116,12 @@ public class EnemyController : MonoBehaviour, IPoolable
             {
                 agent.isStopped = true;
             }
-            StartCoroutine(DieCoroutine()); 
+            StartCoroutine(DieCoroutine());
         }
     }
 
     IEnumerator DieCoroutine()
-    {    
+    {
         // Death should return object to the pool.
         yield return new WaitForSeconds(5);
         // Destroy(gameObject);
