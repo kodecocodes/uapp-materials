@@ -1,0 +1,13 @@
+Music:
+
+Pippin the Hunchback by Kevin MacLeod
+Link: https://incompetech.filmmusic.io/song/4219-pippin-the-hunchback
+License: https://filmmusic.io/standard-license
+
+Thatched Villagers by Kevin MacLeod
+Link: https://incompetech.filmmusic.io/song/4481-thatched-villagers
+License: https://filmmusic.io/standard-license
+
+Prelude and Action by Kevin MacLeod
+Link: https://incompetech.filmmusic.io/song/4236-prelude-and-action
+License: https://filmmusic.io/standard-license
